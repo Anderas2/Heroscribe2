@@ -2,6 +2,7 @@
 """"
   HeroScribe2
   Copyright (C) 2019 Andreas Wagener and Shane Adams
+  Heroscribe 1 was by Flavio Chierichetti and Valerio Chierichetti
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published
