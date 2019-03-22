@@ -30,6 +30,9 @@ def errorprint(*args, **kwargs):
 
 
 class OS_Helper():
+    ''' provides an absolute path to the heroscribe directory, hopefully
+    system independent. Also a method for opening a webbrowser to display
+    the object.html.'''
     def __init__(self):
         # try find the software location
 
