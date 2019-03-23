@@ -21,15 +21,12 @@
 from sortedcontainers import SortedDict
 
 
-# FIXME: Make helper_os! name it differently than "os" to avoid clashes with the
-# python class "os"!
-
 # TODO: reduce the six-fold-symbol madness if possible
 
 # TODO: find out where this is used.
 
 # TODO: Reduce the java style madness if possible
-from src.heroscribe.helper.OS import os as helper_os
+from src.heroscribe.helper import OS_Helper
 
 class List():
     ''' stores objects and returns them or their path on request.
@@ -45,6 +42,7 @@ class List():
         self.raster_suffix = ""
         self.sample_prefix = ""
         self.sample_suffix = ""
+        self.helper_os = OS_Helper()
 
 
     def objects_iterator(self):
@@ -96,11 +94,11 @@ class List():
         or from the board; while the region key gives the EU or US version.
         '''
         if obj_id == None:
-            return helper_os.get_absolute_path(self.vector_prefix +
+            return self.helper_os.get_absolute_path(self.vector_prefix +
                          self.get_board().get_icon(region_key).path +
                          self.vector_suffix)
         else:
-            return helper_os.get_absolute_path(self.vector_prefix +
+            return self.helper_os.get_absolute_path(self.vector_prefix +
                          self.get_object(obj_id).get_icon(region_key).path +
                          self.vector_suffix)
 
@@ -110,11 +108,11 @@ class List():
         or from the board; while the region key gives the EU or US version.
         '''
         if obj_id == None:
-            return helper_os.get_absolute_path(self.raster_prefix +
+            return self.helper_os.get_absolute_path(self.raster_prefix +
                          self.get_board().get_icon(region_key).path +
                          self.raster_suffix)
         else:
-            return helper_os.get_absolute_path(self.raster_prefix +
+            return self.helper_os.get_absolute_path(self.raster_prefix +
                          self.get_object(obj_id).get_icon(region_key).path +
                          self.raster_suffix)
 
@@ -124,11 +122,11 @@ class List():
         or from the board; while the region key gives the EU or US version.
         '''
         if obj_id == None:
-            return helper_os.get_absolute_path(self.sample_prefix +
+            return self.helper_os.get_absolute_path(self.sample_prefix +
                          self.get_board().get_icon(region_key).path +
                          self.sample_suffix)
         else:
-            return helper_os.get_absolute_path(self.sample_prefix +
+            return self.helper_os.get_absolute_path(self.sample_prefix +
                          self.get_object(obj_id).get_icon(region_key).path +
                          self.sample_suffix)
 
