@@ -86,3 +86,4 @@ os.system(cmd)
 # this may work, too
 import webbrowser as wb
 wb.open_new_tab('http://www.google.com')
+'''
