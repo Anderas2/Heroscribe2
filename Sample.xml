@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE objectList PUBLIC
+"-//org.lightless//HeroScribe Object List 1.6//EN"
+"http://lightless.org/files/xml/objectList-1.6.dtd">
+
+<objectList
+version="1.0"
+vectorPrefix="Icons/Vector/" vectorSuffix=".eps.gz"
+rasterPrefix="Icons/Raster/" rasterSuffix=".png"
+samplePrefix="Icons/Sample/" sampleSuffix=".png"
+>
+
+<kind id="hero" name="Heroes" />
+<kind id="monster" name="Monsters" />
+<kind id="man-at-arms" name="Men-at-Arms" />
+<kind id="weapon" name="Weapons" />
+<kind id="armour" name="Armours" />
+<kind id="rank" name="Ranks" />
+<kind id="furniture" name="Furniture" />
+<kind id="door" name="Doors" />
+<kind id="mark" name="Marks" />
+<kind id="trap" name="Traps" />
+<kind id="room" name="Rooms" />
+<kind id="various" name="Various" />
+<kind id="hq25" name="HQ 25 All In One" />
+
+<board name="HeroQuest" width="26" height="19" borderDoorsOffset="0.08" adjacentBoardsOffset="-0.5" default="default">
+<icon region="Europe" path="Europe/Board_EU" />
+<icon region="USA" path="USA/Board_US" />
+
+<!-- Border corridors -->
+<corridor left="1" top="1" width="26" height="1" />
+<corridor left="1" top="19" width="26" height="1" />
+<corridor left="1" top="1" width="1" height="19" />
+<corridor left="26" top="1" width="1" height="19" />
+
+<!-- 2x7 corridors -->
+<corridor left="13" top="1" width="2" height="7" />
+<corridor left="13" top="13" width="2" height="7" />
+
+<!-- 10x1 corridors -->
+<corridor left="1" top="10" width="10" height="1" />
+<corridor left="17" top="10" width="10" height="1" />
+
+<!-- 1x7 corridors -->
+<corridor left="10" top="7" width="1" height="7" />
+<corridor left="17" top="7" width="1" height="7" />
+
+<!-- 8x1 corridors -->
+<corridor left="10" top="7" width="8" height="1" />
+<corridor left="10" top="13" width="8" height="1" />
+</board>
+
+
+<object name="Alchemist's Bench" id="AlchemistsBench" width="3" height="2" kind="furniture" zorder="-5.0">
+<icon region="Europe" path="Europe/Base/AlchemistsBench_EU" />
+<icon region="USA" path="USA/Base/AlchemistsBench_US" />
+</object>
+
+<object name="Arrow" id="Arrow" width="1" height="1" kind="various" zorder="-5.0">
+<icon region="Europe" path="Europe/Base/Arrow_EU" />
+<icon region="USA" path="USA/NonOriginal/Arrow_US" original="false"/>
+</object>
+
+<object name="Barbarian" id="Barbarian" width="1" height="1" kind="hero">
+<icon region="Europe" path="Europe/NonOriginal/Barbarian_EU" original="false"/>
+<icon region="USA" path="USA/Base/Barbarian_US" />
+</object>
+
+<object name="Chaos Warrior" id="ChaosWarrior" width="1" height="1" kind="monster">
+<icon region="Europe" path="Europe/Base/ChaosWarrior_EU" />
+<icon region="USA" path="USA/Base/ChaosWarrior_US" />
+</object>
+<object name="Door" id="Door" width="1" height="2" kind="door" zorder="-1.0" door="true">
+<icon region="Europe" path="Europe/Base/Door_EU" />
+<icon region="USA" path="USA/Base/Door_US" />
+</object>
+
+<object name="Door In" id="DoorIn" width="1" height="2" kind="door" zorder="-1.0" door="true">
+<icon region="Europe" path="Europe/KellarsKeep/KellarsKeep.DoorIn_EU" yoffset="-0.239"/>
+<icon region="USA" path="USA/Base/DoorIn_US" yoffset="-0.219" />
+</object>
+
+<object name="Falling Rock" id="FallingRock" width="1" height="1" kind="trap" zorder="-5.0" trap="true">
+<icon region="Europe" path="Europe/Base/FallingRock_EU" />
+<icon region="USA" path="USA/Base/FallingRock_US" />
+</object>
+
+<object name="Letter A" id="LetterA" width="1" height="1" kind="mark" zorder="5.0">
+<icon region="Europe" path="Europe/Base/LetterA_EU" />
+<icon region="USA" path="USA/Base/LetterA_US" />
+</object>
+
+<object name="6x5 Ocre Room" id="Ocre_Room_2018" width="6" height="5" kind="allinoneroom" zorder="-10">
+<icon region="Europe" path="Europe/YeOldeInn/6x5_Ocre_Symbol_EU" xoffset="0" yoffset="0" original="false"/>
+<icon region="USA" path="USA/YeOldeInn/6x5_Ocre_Symbol_furniture" xoffset="0" yoffset="0" original="false"/>
+<note>
+This symbol was created by Anderas with the help of python, 
+and  the great software autotrace by Martin Weber.
+It was never in any official HeroQuest release.
+</note>
+</object>
+
+</objectList>
