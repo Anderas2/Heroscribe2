@@ -70,7 +70,17 @@ class LBoard():
 
         self.borderDoorsOffset = 0
         self.adjacentBoardsOffset = 0
-        self.corridors = [[]]
+
+        # initializes the corridor matrix with "False";
+        # width squares wide and height squares high.
+        # attention, it's zero-based;
+        # so the first square in the top left corner is [0][0]
+        # and the last square in the lower right corner is [18][20]
+        self.corridors = [[False for j in range(0, width)]
+                                  for i in range(0, height)]
+
+
+
 
     def put_icon(self, icon, region_key):
         ''' takes an icon and puts it into the board dict at the specified
