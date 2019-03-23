@@ -49,6 +49,7 @@ class OS_Helper():
         if self.h_scribe_dir.match("src"):
             self.h_scribe_dir = self.h_scribe_dir.parent
 
+        os.chdir(self.h_scribe_dir)
 
 
 
