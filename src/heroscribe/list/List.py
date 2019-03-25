@@ -42,7 +42,7 @@ class List():
         self.raster_suffix = ""
         self.sample_prefix = ""
         self.sample_suffix = ""
-        self.helper_os = OS_Helper()
+        self.helper_os = OS_Helper.OS_Helper()
 
 
     def objects_iterator(self):
