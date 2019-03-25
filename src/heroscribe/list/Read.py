@@ -142,7 +142,7 @@ class Read():
             or top + height -1 > board.width
             or top < 1):
                 # TODO: Make a better understandable error message
-                raise ValueError("Corridors: out of board border")
+                raise ValueError("Board ",board.name,", Corridors: out of board border")
 
             # mark squares on board as corridor
             # TODO: Check corridor markings
