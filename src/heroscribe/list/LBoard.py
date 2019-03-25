@@ -76,8 +76,9 @@ class LBoard():
         # attention, it's zero-based;
         # so the first square in the top left corner is [0][0]
         # and the last square in the lower right corner is [18][20]
-        self.corridors = [[False for j in range(0, width)]
-                                  for i in range(0, height)]
+        self.corridors = [[False for y in range(0, self.height)]
+                                  for x in range(0, self.width)]
+
 
 
 
@@ -86,14 +87,10 @@ class LBoard():
         ''' takes an icon and puts it into the board dict at the specified
         region.
 
-        :icon: An instance of Icon
+        :icon: An instance of Icon containing a game board
 
         :region_key: a string defining where to put the icon
         '''
-        # TODO: I set a square = an icon. That means there can be one value per
-        # region key only.
-        # We need to see later if there should
-        # rather be a list of icons in each square?
         self.region[region_key] = icon
 
     def get_icon(self, region_key):
