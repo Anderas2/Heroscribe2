@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="objectList" type="objectListType"/>
+
+<xsd:element name="kind" type="kindType"/>
+
+<xsd:element name="board" type="boardType"/>
+
+<xsd:element name="object" type="objectType"/>
+
+<xsd:element name="icon" type="iconType"/>
+
+<xsd:element name="corridor" type="corridorType"/>
+
+<xsd:element name="note" type="xsd:string"/>
+
+<xsd:complexType name="objectListType">
+ <xsd:sequence>
+  <xsd:element ref="kind" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="board" minOccurs="1" maxOccurs="1"/>
+  <xsd:element ref="object" minOccurs="0" maxOccurs="unbounded"/>
+ </xsd:sequence>
+
+ <xsd:attribute name="version" type="xsd:string" use="required"/>
+
+ <xsd:attribute name="vectorPrefix" type="xsd:string" use="required"/>
+ <xsd:attribute name="vectorSuffix" type="xsd:string" use="required"/>
+
+ <xsd:attribute name="rasterPrefix" type="xsd:string" use="required"/>
+ <xsd:attribute name="rasterSuffix" type="xsd:string" use="required"/>
+
+ <xsd:attribute name="samplePrefix" type="xsd:string" use="required"/>
+ <xsd:attribute name="sampleSuffix" type="xsd:string" use="required"/>
+</xsd:complexType>
+   
+<xsd:complexType name="kindType">
+ <xsd:attribute name="id" type="xsd:NCName" use="required"/>
+ <xsd:attribute name="name" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="boardType">
+ <xsd:sequence>
+  <xsd:element ref="icon" minOccurs="1" maxOccurs="unbounded"/>
+  <xsd:element ref="corridor" minOccurs="0" maxOccurs="unbounded"/>
+ </xsd:sequence>
+ <xsd:attribute name="name" type="xsd:string" use="required"/>
+ <xsd:attribute name="width" type="xsd:int" use="required"/>
+ <xsd:attribute name="height" type="xsd:int" use="required"/>
+ <xsd:attribute name="borderDoorsOffset" type="xsd:float" use="required"/>
+ <xsd:attribute name="adjacentBoardsOffset" type="xsd:float" use="required"/>
+ <xsd:attribute name="default" type="xsd:string" use="implied"/>
+</xsd:complexType>
+
+<xsd:complexType name="objectType">
+ <xsd:sequence>
+  <xsd:element ref="icon" minOccurs="1" maxOccurs="unbounded"/>
+  <xsd:element ref="note" minOccurs="0" maxOccurs="1"/>
+ </xsd:sequence>
+
+ <xsd:attribute name="id" type="xsd:NCName" use="required"/>
+ <xsd:attribute name="name" type="xsd:string" use="required"/>
+ <xsd:attribute name="width" type="xsd:float" use="required"/>
+ <xsd:attribute name="height" type="xsd:float" use="required"/>
+ <xsd:attribute name="zorder" type="xsd:float" default="0.0"/>
+
+ <xsd:attribute name="kind" type="xsd:NCName" use="required"/>
+
+ <xsd:attribute name="door" type="xsd:boolean" default="false"/>
+ <xsd:attribute name="trap" type="xsd:boolean" default="false"/>
+ <xsd:attribute name="untraceabletrap" type="xsd:boolean" default="false"/>
+ <xsd:attribute name="miniIcon" type="xsd:boolean" default="false"/>
+</xsd:complexType>
+
+<xsd:complexType name="iconType">
+ <xsd:attribute name="region" type="regionType" use="required"/>
+ <xsd:attribute name="path" type="xsd:string" use="required"/>
+ <xsd:attribute name="xoffset" type="xsd:float" default="0.0"/>
+ <xsd:attribute name="yoffset" type="xsd:float" default="0.0"/>
+ <xsd:attribute name="original" type="xsd:boolean" default="true"/>
+</xsd:complexType>
+
+<xsd:simpleType name="regionType">
+ <xsd:restriction base="xsd:string">
+  <xsd:enumeration value="USA"/>
+  <xsd:enumeration value="Europe"/>
+ </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:complexType name="corridorType">
+ <xsd:attribute name="top" type="xsd:int" use="required" />
+ <xsd:attribute name="left" type="xsd:int" use="required" />
+ <xsd:attribute name="height" type="xsd:int" use="required" />
+ <xsd:attribute name="width" type="xsd:int" use="required" />
+</xsd:complexType>
+
+</xsd:schema>

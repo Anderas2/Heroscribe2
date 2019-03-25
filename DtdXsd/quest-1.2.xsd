@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="quest" type="questType"/>
+<xsd:element name="board" type="boardType"/>
+
+<xsd:element name="speech" type="xsd:string"/>
+<xsd:element name="note" type="xsd:string"/>
+
+<xsd:element name="dark" type="darkType"/>
+<xsd:element name="object" type="objectType"/>
+
+<xsd:complexType name="questType">
+ <xsd:sequence>
+  <xsd:element ref="board" minOccurs="1" maxOccurs="1"/>
+  <xsd:element ref="speech" minOccurs="0" maxOccurs="1"/>
+  <xsd:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+ </xsd:sequence>
+ <xsd:attribute name="name" type="xsd:string" use="required" />
+ <xsd:attribute name="region" type="regionType" use="optional" />
+ <xsd:attribute name="version" type="xsd:string" use="required" />
+</xsd:complexType>
+
+<xsd:complexType name="boardType">
+ <xsd:sequence>
+  <xsd:element ref="dark" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="object" minOccurs="0" maxOccurs="unbounded"/>
+ </xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="darkType">
+ <xsd:attribute name="top" type="xsd:int" use="required" />
+ <xsd:attribute name="left" type="xsd:int" use="required" />
+ <xsd:attribute name="height" type="xsd:int" use="required" />
+ <xsd:attribute name="width" type="xsd:int" use="required" />
+</xsd:complexType>
+
+<xsd:complexType name="objectType">
+ <xsd:attribute name="id" type="xsd:NCName" use="required" />
+ <xsd:attribute name="top" type="xsd:float" use="required" />
+ <xsd:attribute name="left" type="xsd:float" use="required" />
+ <xsd:attribute name="zorder" type="xsd:float" default="0" />
+ <xsd:attribute name="rotation" type="rotationType" default="downward" />
+</xsd:complexType>
+
+<xsd:simpleType name="rotationType">
+ <xsd:restriction base="xsd:string">
+  <xsd:enumeration value="downward"/>
+  <xsd:enumeration value="rightward"/>
+  <xsd:enumeration value="upward"/>
+  <xsd:enumeration value="leftward"/>
+ </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="regionType">
+ <xsd:restriction base="xsd:string">
+  <xsd:enumeration value="USA"/>
+  <xsd:enumeration value="Europe"/>
+ </xsd:restriction>
+</xsd:simpleType>
+
+
+</xsd:schema>
+

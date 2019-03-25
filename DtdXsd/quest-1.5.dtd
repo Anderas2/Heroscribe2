@@ -1,0 +1,46 @@
+<!ELEMENT quest (board+, bridge*, speech?, note*)>
+
+<!ATTLIST quest
+name CDATA #REQUIRED
+region ( Europe | USA ) #IMPLIED
+
+width CDATA #REQUIRED
+height CDATA #REQUIRED
+
+version CDATA #REQUIRED
+boardName CDATA #IMPLIED
+>
+
+<!ELEMENT board (dark*, object*)>
+
+<!ELEMENT bridge EMPTY>
+<!ATTLIST bridge
+column CDATA #REQUIRED
+row CDATA #REQUIRED
+position CDATA #REQUIRED
+orientation (horizontal | vertical) #REQUIRED
+>
+
+<!ELEMENT dark EMPTY>
+<!ATTLIST dark
+top CDATA #REQUIRED
+left CDATA #REQUIRED
+height CDATA #REQUIRED
+width CDATA #REQUIRED
+>
+
+<!ELEMENT object EMPTY>
+<!ATTLIST object
+id NMTOKEN #REQUIRED
+top CDATA #REQUIRED
+left CDATA #REQUIRED
+rotation (downward | rightward | upward | leftward) "downward"
+zorder CDATA #IMPLIED
+xoffset CDATA "0.0"
+yoffset CDATA "0.0"
+>
+
+
+<!ELEMENT speech (#PCDATA)>
+
+<!ELEMENT note (#PCDATA)>

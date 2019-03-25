@@ -32,6 +32,8 @@ class LObject():
         self.zorder = 0
         self.door = False
         self.trap = False
+        self.mini_icon = False
+        self.tags = {}
 
     def put_icon(self, icon, region_key):
         ''' takes an icon and puts it into the board dict at the specified

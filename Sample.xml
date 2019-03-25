@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE objectList PUBLIC
-"-//org.lightless//HeroScribe Object List 1.6//EN"
-"http://lightless.org/files/xml/objectList-1.6.dtd">
+"DtdXsd//HeroScribe Object List 1.6//EN"
+"DtdXsd//objectList-1.6.dtd">
+
 
 <objectList
 version="1.0"
