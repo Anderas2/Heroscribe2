@@ -23,7 +23,7 @@ class Constants():
         self.version = "1.0"
         self.applicationVersionSuffix = "pre1"
 
-        self.europeCorridorColor = (246, 246, 246, 255)
+        self.europeCorridorColor = (255, 255, 255, 255)
         self.usaCorridorColor = (246, 246, 246, 255)
 
         self.europeDarkColor = (204, 204, 204, 255)
