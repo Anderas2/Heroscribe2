@@ -1,0 +1,62 @@
+<!ELEMENT objectList (kind*, board, object*)>
+<!ATTLIST objectList
+version CDATA #REQUIRED
+
+vectorPrefix CDATA #REQUIRED
+vectorSuffix CDATA #REQUIRED
+
+rasterPrefix CDATA #REQUIRED
+rasterSuffix CDATA #REQUIRED
+
+samplePrefix CDATA #REQUIRED
+sampleSuffix CDATA #REQUIRED
+>
+
+<!ELEMENT kind EMPTY>
+<!ATTLIST kind
+id ID #REQUIRED
+name CDATA #REQUIRED
+>
+
+<!ELEMENT board (icon+, corridor*)>
+<!ATTLIST board
+width CDATA #REQUIRED
+height CDATA #REQUIRED
+
+borderDoorsOffset CDATA #REQUIRED
+adjacentBoardsOffset CDATA #REQUIRED
+>
+
+<!ELEMENT object (icon+, note?)>
+<!ATTLIST object
+id ID #REQUIRED
+name CDATA #REQUIRED
+width CDATA #REQUIRED
+height CDATA #REQUIRED
+zorder CDATA "0.0"
+kind IDREF #REQUIRED
+door ( true | false ) "false"
+trap ( true | false ) "false"
+untraceabletrap ( true | false ) "false"
+miniIcon ( true | false ) "false"
+>
+
+<!ELEMENT icon EMPTY>
+<!ATTLIST icon
+region ( Europe | USA ) #REQUIRED
+path CDATA #REQUIRED
+xoffset CDATA "0.0"
+yoffset CDATA "0.0"
+original ( true | false ) "true"
+>
+
+<!ELEMENT note (#PCDATA)>
+
+<!ELEMENT corridor EMPTY>
+<!ATTLIST corridor
+top CDATA #REQUIRED
+left CDATA #REQUIRED
+height CDATA #REQUIRED
+width CDATA #REQUIRED
+>
+

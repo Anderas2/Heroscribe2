@@ -1,0 +1,31 @@
+<!ELEMENT quest (board, speech?, note*)>
+
+<!ATTLIST quest
+name CDATA #REQUIRED
+region ( Europe | USA ) #IMPLIED
+
+version CDATA #REQUIRED
+>
+
+<!ELEMENT board (dark*, object*)>
+
+<!ELEMENT dark EMPTY>
+<!ATTLIST dark
+top CDATA #REQUIRED
+left CDATA #REQUIRED
+height CDATA #REQUIRED
+width CDATA #REQUIRED
+>
+
+<!ELEMENT object EMPTY>
+<!ATTLIST object
+id NMTOKEN #REQUIRED
+top CDATA #REQUIRED
+left CDATA #REQUIRED
+rotation (downward | rightward | upward | leftward) "downward"
+zorder CDATA #IMPLIED>
+
+
+<!ELEMENT speech (#PCDATA)>
+
+<!ELEMENT note (#PCDATA)>
