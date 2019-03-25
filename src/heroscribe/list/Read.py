@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
-""""
-  HeroScribe2
-  Copyright (C) 2019 Andreas Wagener and Shane Adams
-  Heroscribe 1 was by Flavio Chierichetti and Valerio Chierichetti
+"""
+Created on Sat Mar 23 16:02:50 2019
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published
-  by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+@author: Andreas
 """
 
-from src.heroscribe.list import LObject, LBoard, List, Kind, Icon
-from src.heroscribe import Constants
+from xml.dom.minidom import parse
+import xml.dom.minidom
+from pathlib import Path
 
-import xml.sax
+from src.heroscribe.list.LObject import LObject
+from src.heroscribe.list.List import  List
+from src.heroscribe.list.LBoard import LBoard
+from src.heroscribe.list.Kind import Kind
+from src.heroscribe.list.Icon import Icon
+
+from src.heroscribe import Constants
 
 class Read():
 
@@ -30,159 +24,146 @@ class Read():
         self.object_list = List()
         self.piece = LObject()
 
-        self.board = LBoard()
+        # There will be a board of type LBoard later, but not right now.
+        #self.board
         self.content = ''
-        self.on_board = False # gives the state during parsing if we are on a
-                                # board or not.
-
-        parser = xml.sax.make_parser()
-        # did not find a "setValidation" function
-        parser.parse(file_loc)
+        # gives the state during parsing if we are on a board or not.
+        self.on_board = False
 
 
+        DomTree = xml.dom.minidom.parse(str(file_loc))
+        object_xml = DomTree.documentElement
+        #for key in object_xml._attrs.keys():
+        self.object_list.version = object_xml.getAttribute('version')
+        self.object_list.vector_prefix = object_xml.getAttribute('vectorPrefix')
+        self.object_list.vector_suffix = object_xml.getAttribute('vectorSuffix')
+        self.object_list.raster_prefix = object_xml.getAttribute('rasterPrefix')
+        self.object_list.raster_suffix = object_xml.getAttribute('rasterSuffix')
+        self.object_list.sample_prefix = object_xml.getAttribute('samplePrefix')
+        self.object_list.sample_suffix = object_xml.getAttribute('sampleSuffix')
+
+        # heroscribe folders
+        for kind in object_xml.getElementsByTagName("kind"):
+            kind_id = kind.getAttribute('id')
+            kind_name = kind.getAttribute('name')
+            self.object_list.kinds.add(Kind(kind_id, kind_name))
+
+
+        # game boards
+        for xmlboard in object_xml.getElementsByTagName("board"):
+            self.object_list.board = self.read_xml_board(xmlboard)
+
+        # other game pieces
+        for xmlpiece in object_xml.getElementsByTagName("object"):
+            piece = self.get_game_piece(xmlpiece)
+            self.object_list.object_list[piece.id] = piece
 
 
 
-    def get_objects(self):
-        return self.object_list
 
-    def resolve_entity(self, public_id, system_id):
-        ''' checks if the input file is indeed our object.xml,
-        if it has version 1.5;
-        switches to old "InputSource" if it is version 1.5.
+
+    def get_game_piece(self, xmlpiece):
+        piece = LObject()
+        piece.id = xmlpiece.getAttribute("id")
+        piece.name = xmlpiece.getAttribute("name")
+        piece.kind = xmlpiece.getAttribute("kind")
+
+        piece.door = xmlpiece.getAttribute("door")
+        piece.trap = xmlpiece.getAttribute("trap")
+        piece.u_trap = xmlpiece.getAttribute("untraceabletrap")
+
+        piece.width = xmlpiece.getAttribute("width")
+        piece.height = xmlpiece.getAttribute("height")
+        piece.zorder = xmlpiece.getAttribute("zorder")
+        piece.mini_icon = xmlpiece.getAttribute("miniIcon")
+
+        # TODO: put tag dictionary into the xml file and read them here,
+        # for better filter functions
+        piece.tags  = xmlpiece.getAttribute("tags")
+
+        for xmlicon in xmlpiece.getElementsByTagName("icon"):
+            icon, region = self.read_xml_icon(xmlicon)
+            piece.put_icon(icon, region)
+
+        piece.note = self.get_notes(xmlpiece)
+        return piece
+
+    def get_notes(self, xml_anything):
+        ''' extracts all text from all notes nodes in xml_anything'''
+        notes = ''
+        if xml_anything.getElementsByTagName("note"):
+            for xmlnote in xml_anything.getElementsByTagName("note"):
+                notes = notes + xmlnote.childNodes[0]._data
+        return notes
+
+
+
+    def read_xml_icon(self, xmlicon):
+        '''reads an icon into the icon data structure and returns it
         '''
-        if ( public_id == "-//org.lightless//HeroScribe Object List 1.5//EN"):
-            return xml.sax.InputSource("DtdXsd/objectList-1.5.dtd")
+
+        path = xmlicon.getAttribute('path')
+        xoffset = xmlicon.getAttribute('xoffset')
+        if bool(xoffset):
+            xoffset = float(xoffset)
         else:
-            return None
-
-    def start_document(self):
-        self.content = ''
-        self.on_board = False;
-
-    def start_element(self, uri, local_name, q_name, attrs):
-        ''' takes the output of the sax parser and treats the content depending
-        on the "q_name".
-        Normally "q_name" should be objectList, board, object or note.
-        '''
-        self.content = ''
-        if q_name == "objectList":
-            self.object_list.version = attrs.getValue("version")
-            if not self.object_list.version == Constants.version:
-                raise xml.sax.SAXException(
-                "HeroScribe's and Objects.xml's version numbers don't match.")
-
-            self.object_list.vectorPrefix = attrs.getValue("vectorPrefix")
-            self.object_list.vectorPrefix = attrs.getValue("vectorSuffix")
-            self.object_list.vectorPrefix = attrs.getValue("rasterPrefix")
-            self.object_list.vectorPrefix = attrs.getValue("vectorSuffix")
-            self.object_list.vectorPrefix = attrs.getValue("samplePrefix")
-            self.object_list.vectorPrefix = attrs.getValue("vectorSuffix")
-
-        elif q_name == "kind":
-            self.object_list.kinds.add(Kind(attrs.getValue("id"),
-                                            attrs.getValue("name")))
-
-        elif q_name == "board":
-            board = LBoard(int(attrs.getValue("width")),
-                           int(attrs.getValue("height")))
-            board.border_doors_offset = float(
-                                        attrs.getValue("borderDoorsOffset"))
-            board.adjacent_boards_offset = float(
-                                    attrs.getValue("adjacentBoardsOffset"))
-            self.on_board = True
-
-        elif q_name == "object":
-            piece = LObject()
-            piece.id = attrs.getValue("id")
-            piece.name = attrs.getValue("name")
-            piece.kind = attrs.getValue("kind")
-            piece.door = bool(attrs.getValue("door").lower() in ["true", "door"])
-            piece.trap = bool(attrs.getValue("trap").lower() in ["true", "trap"])
-            piece.width = int(attrs.getValue("width"))
-            piece.height = int(attrs.getValue("height"))
-            piece.zorder = int(attrs.getValue("zorder"))
-            piece.note = None
-            self.piece = piece
-
-        elif q_name == "icon":
-            icon = Icon()
-            icon.path = attrs.getValue("path")
-            icon.path = attrs.getValue("xoffset")
-            icon.path = attrs.getValue("yoffset")
-            icon.path = bool(attrs.getValue("original").lower() in ["true", "original"])
-            if self.on_board:
-                board.putIcon(icon, attrs.getValue("region"))
-            else:
-                self.piece.putIcon(icon, attrs.getValue("region"))
-
-        elif q_name == "corridor":
-            if self.on_board:
-                width = int(attrs.getValue("width"))
-                height = int(attrs.getValue("height"))
-                left = int(attrs.getValue("left"))
-                top = int(attrs.getValue("top"))
-
-                if (left + width > board.width
-                or left < 1
-                or top + height > board.width
-                or top < 1):
-                    raise xml.sax.SAXException(
-                                            "Corridors: out of board border")
-
-                for x in range(0, width):
-                    for y in range(0, height):
-                        self.board.corridors[x + left][y + top] = True
+            xoffset = 0
+        yoffset = xmlicon.getAttribute('yoffset')
+        if bool(yoffset):
+            yoffset = float(yoffset)
         else:
-            # if q_name is something unknown, don't treat it.
-            # TODO: include "room"?
-            # TODO: include monster fight values?
+            yoffset = 0
+        original = xmlicon.getAttribute('original')
+        original = original.lower in ['true']
+        region = xmlicon.getAttribute('region')
+        return Icon(path, xoffset, yoffset, original), region
+
+
+    def read_xml_board(self, xmlboard):
+        board = LBoard(xmlboard.getAttribute('width'),
+                              xmlboard.getAttribute('height'))
+        board.border_doors_offset = float(xmlboard.getAttribute("borderDoorsOffset"))
+        board.adjacent_boards_offset = float(xmlboard.getAttribute('adjacentBoardsOffset'))
+        board.name = xmlboard.getAttribute('name')
+        board.default = xmlboard.getAttribute('default')
+
+        for xmlicon in xmlboard.getElementsByTagName("icon"):
+            icon, region = self.read_xml_icon(xmlicon)
+            board.put_icon(icon, region)
+
+        # corridors are defined to make them a little darker in the US version.
+        for xmlcorridor in xmlboard.getElementsByTagName("corridor"):
+            left = int(xmlcorridor.getAttribute("left"))
+            top = int(xmlcorridor.getAttribute("top"))
+            width = int(xmlcorridor.getAttribute("width"))
+            height = int(xmlcorridor.getAttribute("height"))
+            if (left + width -1 > board.width
+            or left < 1
+            or top + height -1 > board.width
+            or top < 1):
+                # TODO: Make a better understandable error message
+                raise ValueError("Corridors: out of board border")
+
+            # mark squares on board as corridor
+            # TODO: Check corridor markings
+            for x in range(0, width):
+                for y in range(0, height):
+                    board.corridors[x + left -1 ][y + top -1] = True
+
+
+        for xmlroom in xmlboard.getElementsByTagName("room"):
+            # TODO: For questimator extension, read rooms here
             pass
+        return board
 
 
 
-    def end_element(self, uri, local_name, q_name):
-        ''' at the end of an element, check if it has both layouts.
-        If yes, store in the appropriate data structure
-
-        :uri: unused?
-
-        :local_name: unused?
-
-        :q_name: name of the overarching element in object.xml.
-            can be "board", "object", or "note"
-        '''
-        if q_name == "board":
-            # check if both layouts are there
-            if ("Europe" not in self.board.region.keys()
-            and "USA" not in self.board.region.keys() ):
-                raise xml.sax.SAXException("There should be an icon for Europe and one for USA for each board.")
-
-            self.object_list.board = self.board
-            self.on_board = False
-
-        elif q_name == "object":
-            if ("Europe" not in self.piece.region.keys()
-            and "USA" not in self.piece.region.keys() ):
-                raise xml.sax.SAXException("There should be an icon for Europe and one for USA for each board.")
-
-            self.object_list.object_list[self.piece.id] = self.piece
-
-        elif q_name == "note":
-            self.piece.note = self.content
-
-    def end_document(self):
-        self.content = None
-        self.piece = None
+file_loc = Path('C:/Users/Andreas/25 Heroquest/Heroscribe 2/Sample.xml')
+readfile = Read(file_loc)
 
 
 
 
-    def error(self, e):
-        raise xml.sax.SAXParseException(e);
 
-    def characters(self, in_str, start=None, length=None):
-        ''' appends in_str at position start, with a certain
-        length of length'''
-        # TODO: this function seems to be unused! Confirm and remove this function
-        self.content = self.content + in_str # dummy to preserve base functionality
+
+
