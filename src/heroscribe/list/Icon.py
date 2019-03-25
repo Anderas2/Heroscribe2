@@ -27,7 +27,7 @@ class Icon():
                  xoffset,
                  yoffset,
                  original,
-                 image):
+                 image=None):
         self.path = Path(filepath)
         self.xoffset = xoffset
         self.yoffset = yoffset
