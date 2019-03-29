@@ -41,7 +41,7 @@ class LObject():
 
         :icon: An instance of Icon
 
-        :region_key: a string defining where to put the icon
+        :region_key: a string defining which region style to use in the icon
         '''
         # TODO: I set a square = an icon. That means there can be one value per
         # region key only.
