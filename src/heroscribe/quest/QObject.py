@@ -1,8 +1,25 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Mar 29 12:48:13 2019
+""""
+  HeroScribe2 QObject
 
-@author: Andreas
+  An object placed on the board has an z-order (is it below or above other
+  stuff?); a rotation facing N, E, S or W; and a position.
+
+  Copyright (C) 2019 Andreas Wagener and Shane Adams
+  Heroscribe 1 was by Flavio Chierichetti and Valerio Chierichetti
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published
+  by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
 from src.heroscribe.list.List import List
