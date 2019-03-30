@@ -21,7 +21,7 @@
 
 from src.heroscribe.list.LBoard import LBoard
 from src.heroscribe.quest.QBoard import QBoard
-from src.heroscribe.quest.Write import Write
+#from src.heroscribe.quest.Write import Write
 
 from itertools import chain
 
@@ -39,7 +39,7 @@ class Quest():
 
         self.width = width
         self.height = height
-        self.boards = QBoards(width, height) #TODO: write QBoards
+        self.boards = QBoard(width, height)
 
         self.boards = [[QBoard(board.width, board.height) for y in range(0, self.height)]
                                                             for x in range(0, self.width)]
