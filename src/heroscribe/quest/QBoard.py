@@ -27,13 +27,15 @@ class QBoard ():
     Ensures there are no two pieces of the same kind on the same square.'''
     def __init__(self, width, height, quest):
 
+        self.width = width
+        self.height = height
+
+
         # notes which square was marked dark
         self.dark = [[False for y in range(0, self.height)]
                                   for x in range(0, self.width)]
         self.objects = [] # List of QObjects
         self.quest = quest # type Quest
-        self.width = width
-        self.height = height
 
 
     def get_width(self):
