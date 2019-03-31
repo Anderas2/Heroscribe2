@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE quest PUBLIC
-"-//org.lightless//HeroScribe Quest 1.5//EN"
-"http://lightless.org/files/xml/quest-1.5.dtd">
+"-//HeroScribe Quest 2//EN"
+"http://DtdXsd/quest-2.0.dtd">
 
-<quest name="" region="Europe" version="1.0" width="1" height="1" boardName="HeroQuest">
+<quest name="" region="Europe" version="2.0" width="1" height="1" boardName="HeroQuest">
 <board>
 <object id="CarpetRoom" left="18.0" top="2.0" rotation="downward" zorder="-10.0" />
 <object id="Table" left="6.0" top="8.0" rotation="downward" zorder="-5.0" />

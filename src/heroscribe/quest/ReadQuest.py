@@ -40,7 +40,7 @@ class ReadQuest():
         self.quest
         self.objects = objects # of type Heroscribe.list.List
         self.content = ''
-        self.file_loc = file_loc
+        self.file_loc = Path(file_loc)
         self.board #of type QBoard
         self.width = 0
         self.height = 0
@@ -61,14 +61,15 @@ class ReadQuest():
 
 
     def read_version_one_file(self, xml_questfile):
+        boardname = xml_questfile.getAttribute('boardname')
         name = xml_questfile.getAttribute('name')
         region = xml_questfile.getAttribute('region')
-
         width = int(xml_questfile.getAttribute('width'))
         height = int(xml_questfile.getAttribute('height'))
+
         width = 1 if width < 1 else width
         height = 1 if height < 1 else height
-        boardname = xml_questfile.getAttribute('boardname')
+
         if boardname == '':
             boardname = "HeroQuest"
         if len(region) == 0:
@@ -85,6 +86,32 @@ class ReadQuest():
                          region = region)
         xml_board = xml_questfile.getElementsByTagName("board")[0]
         self.read_board(xml_board)
+
+    def read_version_two_file(self, xml_questfile):
+        '''difference between version one and two is that there are lots
+        more notes tags, monster definitions and a wandering monster in
+        version 2. '''
+        self.read_version_one_file(xml_questfile)
+        if xml_questfile.getElementsByTagName('monsterstat'):
+            for xml_monster in xml_questfile.getElementsByTagName('monsterstat'):
+                self.read_specialmonsters(xml_monster)
+
+        if xml_questfile.getElementsByTagName('wanderingmonster'):
+            xml_wandermonster = xml_questfile.getElementsByTagName('wanderingmonster')[0]
+            self.read_wanderingmonster(xml_wandermonster)
+
+        if xml_questfile.getElementsByTagName('subtitle'):
+            self.read_subtitle(xml_questfile.getElementsByTagName('subtitle'))
+
+        if xml_questfile.getElementsByTagName('title'):
+            self.read_title(xml_questfile.getElementsByTagName('title'))
+
+        if xml_questfile.getElementsByTagName('questtext'):
+            self.read_questtext(xml_questfile.getElementsByTagName('questtext'))
+
+        if xml_questfile.getElementsByTagName('notes'):
+            self.read_notes(xml_questfile.getElementsByTagName('notes'))
+
 
     def read_board(self, xml_board):
         if self.board_count > (self.width * self.height):
@@ -132,7 +159,11 @@ class ReadQuest():
     def read_specialmonsters(self, xml_monsters):
         # This little stat line that you can find in quest notes.
         # line above, then headline row, then stats, then line below. ITCCLearface or HQModern. Pink for US, Dark brown for EU.
+        # definition is here
+        # https://github.com/Anderas2/Heroscribe2/wiki/Monsterstat-xml-tag-definition
         pass
+
+
     def read_wanderingmonster(self, xml_wanderingmonster):
         # To format the wandering monster of the quest.
         pass
