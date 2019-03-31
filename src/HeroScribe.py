@@ -10,16 +10,29 @@ from src.heroscribe.helper.OS_Helper import OS_Helper
 
 from src.heroscribe.Preferences import Preferences
 
-from src.heroscribe.gui.test_gui import hs2_window
 from src.heroscribe.list.List import List
+from src.heroscribe.list.Read import Read as listread
+from src.heroscribe.gui.test_gui import hs2_window as gui
+
 from src.heroscribe.quest.Quest import Quest
 import sys
 
 class HeroScribe():
     def __init__(self):
-        self.osh = OS_Helper.OS_Helper()
+        self.osh = OS_Helper()
         if self.osh.isMac :
             # set mac specific things here
 
             pass
+        self.osh.errorprint("starting up.")
+        self.preferences = Preferences()
+        self.objects = listread("Objects.xml").object_list
+        self.osh.errorprint("objects read")
+        self.quest = Quest(width = 1,
+                             height = 1,
+                             board = self.objects.get_board())
+        self.osh.errorprint("Quest loaded. Starting GUI.")
+        #self.gui = gui()
+        #self.osh.errorprint("Gui done.")
+
 
