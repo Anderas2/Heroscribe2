@@ -28,10 +28,10 @@ from itertools import chain
 
 class Quest():
     def __init__(self,
-                 file,
                  width,
                  height,
                  board,
+                 file = None,
                  name = '',
                  region = 'Europe',
                  speech = '',
@@ -39,9 +39,9 @@ class Quest():
 
         self.width = width
         self.height = height
-        self.boards = QBoard(width, height)
+        #self.boards = [[]]
 
-        self.boards = [[QBoard(board.width, board.height) for y in range(0, self.height)]
+        self.boards = [[QBoard(board.width, board.height, self) for y in range(0, self.height)]
                                                             for x in range(0, self.width)]
 
         self.horizontal_bridges = [[[False for x in range(0, self.width-1)]
