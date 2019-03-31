@@ -7,17 +7,83 @@
 
 <xsd:element name="bridge" type="bridgeType"/>
 
-<xsd:element name="speech" type="xsd:string"/>
-<xsd:element name="note" type="xsd:string"/>
+<xsd:element name="subtitle" type="xsd:string"/>
+<xsd:element name="title" type="xsd:string"/>
+<xsd:element name="questtext" type="xsd:string"/>
+<xsd:element name="notes" type="xsd:string"/>
+
+<xsd:element name="mark" type="markType"/>
+
+<xsd:element name="monsterstat" type="monsterstatType"/>
+<xsd:element name="wanderingmonster" type="wanderingmonsterType"/>
+<xsd:element name="monster" type="monsterType"/>
 
 <xsd:element name="dark" type="darkType"/>
 <xsd:element name="object" type="objectType"/>
 
+
+
+
+
+
+<xsd:complexType name="markType">
+ <xsd:attribute name="id" type="xsd:string" use="required" />
+</xsd:complexType>
+
+<xsd:complexType name="monsterstat" type="monsterstatType">
+ <xsd:attribute name="name" type="xsd:string" use="required" />
+ <xsd:attribute name="heroscribe_symbol_id" type="xsd:string" use="required" />
+
+ <xsd:attribute name="attack" type="xsd:string" use="required" />
+ <xsd:attribute name="defense" type="xsd:string" use="required" />
+ <xsd:attribute name="body" type="xsd:int" use="optional" />
+ <xsd:attribute name="mind" type="xsd:int" use="optional" />
+ <xsd:attribute name="move" type="xsd:int" use="optional" />
+ 
+ <xsd:attribute name="specialrule" type="xsd:string" use="optional" />
+
+ <xsd:attribute name="at_symbol" type="xsd:string" use="optional" />
+ <xsd:attribute name="de_symbol" type="xsd:string" use="optional" />
+ 
+ <xsd:attribute name="at_number" type="xsd:int" use="optional" />
+ <xsd:attribute name="at_dmg_type" type="xsd:string" use="optional" />
+ <xsd:attribute name="at_reroll" type="xsd:string" use="optional" />
+ <xsd:attribute name="at_options" type="xsd:string" use="optional" />
+ 
+ <xsd:attribute name="de_options" type="xsd:string" use="optional" />
+ <xsd:attribute name="de_reroll" type="xsd:string" use="optional" />
+
+ <xsd:attribute name="list_of_spells" type="xsd:string" use="optional" />
+ <xsd:attribute name="tags" type="xsd:string" use="optional" />
+ 
+</xsd:complexType>
+
+<xsd:complexType name="monsterType">
+ <xsd:attribute name="id" type="xsd:string" use="required" />
+</xsd:complexType>
+
+<xsd:complexType name="wanderingmonsterType">
+ <xsd:sequence>
+  <xsd:element ref="monster" minOccurs="0" maxOccurs="unbounded"/>
+ </xsd:sequence>
+</xsd:complexType>
+
+ 
 <xsd:complexType name="questType">
  <xsd:sequence>
   <xsd:element ref="board" minOccurs="1" maxOccurs="unbounded"/>
   <xsd:element ref="bridge" minOccurs="0" maxOccurs="unbounded"/>
+
+  <xsd:element ref="subtitle" minOccurs="0" maxOccurs="1"/>
+  <xsd:element ref="title" minOccurs="0" maxOccurs="1"/>
+  <xsd:element ref="questtext" minOccurs="0" maxOccurs="1"/>
+  <xsd:element ref="notes" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="mark" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="monsterstat" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="wanderingmonster" minOccurs="0" maxOccurs="unbounded"/>
+  <xsd:element ref="monster" minOccurs="0" maxOccurs="unbounded"/>
   <xsd:element ref="speech" minOccurs="0" maxOccurs="1"/>
+  
   <xsd:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
  </xsd:sequence>
  <xsd:attribute name="name" type="xsd:string" use="required" />
