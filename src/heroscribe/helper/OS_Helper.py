@@ -25,8 +25,7 @@ import platform
 import os
 import pathlib
 
-def errorprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
+
 
 
 class OS_Helper():
@@ -50,8 +49,10 @@ class OS_Helper():
             self.h_scribe_dir = self.h_scribe_dir.parent
 
         os.chdir(self.h_scribe_dir)
+        self.isMac = platform.system() == "Darwin"
 
-
+    def errorprint(self, *args, **kwargs):
+        print(*args, file=sys.stderr, **kwargs)
 
     def open_url(self, url, str_ref=None):
         file = Path(url)
