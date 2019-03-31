@@ -3,6 +3,29 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow
 #from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 
+language_dict = {"en":{"add_objects" : "Add Objects",
+                       "edit_objects": "Edit Objects",
+                       "darken": "Darken/Color",
+                       "import":"Import",
+                       "export":"Export",
+                       "questimate":"Questimate",
+                      },
+                 "de":{"add_objects" : "Neues Teil",
+                       "edit_objects": "Teil bearbeiten",
+                       "darken": "abdunkeln / färben",
+                       "import":"Import",
+                       "export":"Export",
+                       "questimate":"Questimate",
+                      },
+                 "fr":{"add_objects" : "Nouveau Piece",
+                       "edit_objects": "Editer Piece",
+                       "darken": "sombrer / coulourer",
+                       "import":"importer",
+                       "export":"exporter",
+                       "questimate":"Questimate",
+                      },
+                 }
+
 class hs2_window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -13,6 +36,7 @@ class hs2_window(QMainWindow):
         self.width = 1024
         self.height = 768
         self.initUI()
+        self.lan = "en"
 
 	# Initialize the GUI to the main window
     def initUI(self):
@@ -40,19 +64,19 @@ class hs2_window(QMainWindow):
         dark_button.setToolTip('Darken/color squares on the map')
         dark_button.move(20, 80)
         dark_button.clicked.connect(self.dark_click)
-        
+
         # Import button
         import_button = QPushButton('Import', self)
         import_button.setToolTip('Import icons, maps or quests')
         import_button.move(20, 110)
         import_button.clicked.connect(self.import_click)
-        
+
         # Export button
         export_button = QPushButton('Export', self)
         export_button.setToolTip('Export icons, maps, or quests')
         export_button.move(20, 140)
         export_button.clicked.connect(self.export_click)
-        
+
         # Questimator button
         quest_button = QPushButton('Questimator', self)
         quest_button.setToolTip('Questimator functionality')
@@ -67,7 +91,7 @@ class hs2_window(QMainWindow):
     @pyqtSlot()
     def add_click(self):
         self.statusBar().showMessage('Add button pressed')
-	
+
 	# Edit Object button
     @pyqtSlot()
     def edit_click(self):
@@ -77,17 +101,17 @@ class hs2_window(QMainWindow):
     @pyqtSlot()
     def dark_click(self):
         self.statusBar().showMessage('Darken button pressed')
-        
+
     # Import button
     @pyqtSlot()
     def import_click(self):
     	self.statusBar().showMessage('Import functionality hopefully coming soon!')
-    	
+
     # Export button
     @pyqtSlot()
     def export_click(self):
     	self.statusBar().showMessage('Export functionality hopefully coming soon!')
-    	
+
     # Questimator button
     @pyqtSlot()
     def quest_click(self):
