@@ -137,12 +137,20 @@ class Read():
             top = int(xmlcorridor.getAttribute("top"))
             width = int(xmlcorridor.getAttribute("width"))
             height = int(xmlcorridor.getAttribute("height"))
-            if (left + width -1 > board.width
+            if ( (left + width -1) > board.width
             or left < 1
-            or top + height -1 > board.width
+            or (top + height -1) > board.height
             or top < 1):
                 # TODO: Make a better understandable error message
-                raise ValueError("Board ",board.name,", Corridors: out of board border")
+                message = (r"Board " + board.name + ", Corridors: out of board border\n"
+                         + "width = " + str(width) + "\n"
+                         + "height = " + str(height) + "\n"
+                         + "top = " + str(top) + "\n"
+                         + "left = " + str(left) + "\n"
+                         + "board width = " + str(board.width) + "\n"
+                         + "board height = " + str(board.height) + "\n")
+
+                raise ValueError(message)
 
             # mark squares on board as corridor
             # TODO: Check corridor markings
