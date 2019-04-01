@@ -35,8 +35,17 @@ class hs2_window(QMainWindow):
         self.top = 10
         self.width = 1024
         self.height = 768
+        try:
+        	options = open("options", "r")
+        	self.lang = options.readline()[9:]
+        	options.close()
+        except FileNotFoundError: 
+        	options = open("options", "x")
+        	options.write("language=en\n")
+        	self.lang = "en"
+        	options.close()
         self.initUI()
-        self.lan = "en"
+
 
 	# Initialize the GUI to the main window
     def initUI(self):
@@ -48,7 +57,7 @@ class hs2_window(QMainWindow):
 		# NOTE: I'm thinking these might be better at the top of the screen, then
 		# we will have the section specific buttons/boxes on the left side
         # Add Objects button
-        add_button = QPushButton('Add Objects', self)
+        add_button = QPushButton("Add Objects", self)
         add_button.setToolTip('Add elements to the map')
         add_button.move(20, 20)
         add_button.clicked.connect(self.add_click)
