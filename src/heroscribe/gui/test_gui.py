@@ -1,26 +1,5 @@
-# -*- coding: utf-8 -*-
-""""
-  HeroScribe2
-  Copyright (C) 2019 Andreas Wagener and Shane Adams
-  Heroscribe 1 was by Flavio Chierichetti and Valerio Chierichetti
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published
-  by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-"""
-
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow
-#from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
 from PyQt5.QtCore import pyqtSlot
 
 language_dict = {"en":{"add_objects" : "Add Objects",
@@ -51,26 +30,32 @@ class hs2_window(QMainWindow):
         super().__init__()
         # Window stats
         self.title = 'Heroscribe 2.0'
-        self.left = 10
-        self.top = 10
         self.width = 1024
         self.height = 768
+        try:
+        	options = open("options", "r")
+        	self.lang = options.readline()[9:]
+        	options.close()
+        except FileNotFoundError: 
+        	options = open("options", "x")
+        	options.write("language=en\n")
+        	self.lang = "en"
+        	options.close()
         self.initUI()
-        self.lan = "en"
-        self.app = QApplication(sys.argv)
 
 
 	# Initialize the GUI to the main window
     def initUI(self):
         self.setWindowTitle(self.title)
-        self.setGeometry(self.left,self.top, self.width, self.height)
+        self.resize(1024, 768)
+        self.center_window()
         self.statusBar().showMessage('Map Editor')
 
 		#--------------------Buttons--------------------#
 		# NOTE: I'm thinking these might be better at the top of the screen, then
 		# we will have the section specific buttons/boxes on the left side
         # Add Objects button
-        add_button = QPushButton('Add Objects', self)
+        add_button = QPushButton("Add Objects", self)
         add_button.setToolTip('Add elements to the map')
         add_button.move(20, 20)
         add_button.clicked.connect(self.add_click)
@@ -99,52 +84,40 @@ class hs2_window(QMainWindow):
         export_button.move(20, 140)
         export_button.clicked.connect(self.export_click)
 
-        # Questimator button
-        quest_button = QPushButton('Questimator', self)
-        quest_button.setToolTip('Questimator functionality')
-        quest_button.move(20, 170)
-        quest_button.clicked.connect(self.quest_click)
-
         # Display the window
         self.show()
+        
+    # Function to center main window
+    def center_window(self):
+    	win_bounds = self.frameGeometry()
+    	screen_cp = QDesktopWidget().availableGeometry().center()
+    	win_bounds.moveCenter(screen_cp)
+    	self.move(win_bounds.topLeft())
 
 	#--------------------Button Event Handlers--------------------#
 	# Add Object button
-    @pyqtSlot()
     def add_click(self):
         self.statusBar().showMessage('Add button pressed')
 
 	# Edit Object button
-    @pyqtSlot()
     def edit_click(self):
         self.statusBar().showMessage('Edit button pressed')
 
 	# Darken/Color button
-    @pyqtSlot()
     def dark_click(self):
         self.statusBar().showMessage('Darken button pressed')
 
     # Import button
-    @pyqtSlot()
     def import_click(self):
     	self.statusBar().showMessage('Import functionality hopefully coming soon!')
 
     # Export button
-    @pyqtSlot()
     def export_click(self):
     	self.statusBar().showMessage('Export functionality hopefully coming soon!')
 
-    # Questimator button
-    @pyqtSlot()
-    def quest_click(self):
-    	self.statusBar().showMessage('Questimator functionality hopefully coming soon!')
-
-    def exit_gui(self):
-        sys.exit(app.exec_())
 
 
-
-#if __name__ == '__main__':
-#    app = QApplication(sys.argv)
-#    ex = hs2_window()
-#    sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = hs2_window()
+    sys.exit(app.exec_())
