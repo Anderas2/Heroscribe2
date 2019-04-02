@@ -27,6 +27,9 @@ from src.heroscribe.list.Read import Read as listread
 from src.heroscribe.gui.test_gui import hs2_window as gui
 
 from src.heroscribe.quest.Quest import Quest
+
+from PyQt5.QtWidgets import QApplication
+
 import sys
 
 class HeroScribe():
@@ -46,8 +49,11 @@ class HeroScribe():
                              height = 1,
                              board = self.objects.get_board())
         self.osh.errorprint("Quest loaded. Starting GUI.")
-        app = QApplication(sys.argv)
         self.gui = gui()
         #self.osh.errorprint("Gui done.")
 
 
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = gui()
+    sys.exit(app.exec_())
