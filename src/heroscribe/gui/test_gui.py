@@ -13,7 +13,7 @@ class hs2_window(QMainWindow):
         self.height = 768
 
         pref = Preferences()
-        self.g_text = pref.gui_texts['add_objects']
+        self.g_text = pref.gui_texts
 
         try:
         	options = open("options", "r")
