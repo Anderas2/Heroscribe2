@@ -1,6 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow
-#from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
 from PyQt5.QtCore import pyqtSlot
 
 language_dict = {"en":{"add_objects" : "Add Objects",
@@ -31,8 +30,6 @@ class hs2_window(QMainWindow):
         super().__init__()
         # Window stats
         self.title = 'Heroscribe 2.0'
-        self.left = 10
-        self.top = 10
         self.width = 1024
         self.height = 768
         try:
@@ -50,7 +47,8 @@ class hs2_window(QMainWindow):
 	# Initialize the GUI to the main window
     def initUI(self):
         self.setWindowTitle(self.title)
-        self.setGeometry(self.left,self.top, self.width, self.height)
+        self.resize(1024, 768)
+        self.center_window()
         self.statusBar().showMessage('Map Editor')
 
 		#--------------------Buttons--------------------#
@@ -86,45 +84,37 @@ class hs2_window(QMainWindow):
         export_button.move(20, 140)
         export_button.clicked.connect(self.export_click)
 
-        # Questimator button
-        quest_button = QPushButton('Questimator', self)
-        quest_button.setToolTip('Questimator functionality')
-        quest_button.move(20, 170)
-        quest_button.clicked.connect(self.quest_click)
-
         # Display the window
         self.show()
+        
+    # Function to center main window
+    def center_window(self):
+    	win_bounds = self.frameGeometry()
+    	screen_cp = QDesktopWidget().availableGeometry().center()
+    	win_bounds.moveCenter(screen_cp)
+    	self.move(win_bounds.topLeft())
 
 	#--------------------Button Event Handlers--------------------#
 	# Add Object button
-    @pyqtSlot()
     def add_click(self):
         self.statusBar().showMessage('Add button pressed')
 
 	# Edit Object button
-    @pyqtSlot()
     def edit_click(self):
         self.statusBar().showMessage('Edit button pressed')
 
 	# Darken/Color button
-    @pyqtSlot()
     def dark_click(self):
         self.statusBar().showMessage('Darken button pressed')
 
     # Import button
-    @pyqtSlot()
     def import_click(self):
     	self.statusBar().showMessage('Import functionality hopefully coming soon!')
 
     # Export button
-    @pyqtSlot()
     def export_click(self):
     	self.statusBar().showMessage('Export functionality hopefully coming soon!')
 
-    # Questimator button
-    @pyqtSlot()
-    def quest_click(self):
-    	self.statusBar().showMessage('Questimator functionality hopefully coming soon!')
 
 
 if __name__ == '__main__':
