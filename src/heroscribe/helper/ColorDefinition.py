@@ -70,6 +70,8 @@ class ColorSchemes():
         'us_corridor_square_border': self.tuple_mult((186, 158, 154,), 1./255),
         'us_room_square_border': self.tuple_mult((212, 196, 193,), 1./255),
         'us_room_border': self.tuple_mult((95, 35, 24,), 1./255),
+        'us_darkened_square' : self.tuple_mult((189, 160, 154,), 1./255),
+        'us_darkened_square_border' : self.tuple_mult((164, 126, 119,), 1./255),
         }
         self.colors = colors
 
@@ -95,13 +97,16 @@ class ColorSchemes():
         make_a_gradient(colors['black'], colors['white'],
                         name='mini', gradients, rgbs)
 
-        make_a_gradient(colors['black'], colors['white'],
+        make_a_gradient(colors['us_room_square_border'],
+                        colors['white'],
                         name='room', gradients, rgbs)
 
-        make_a_gradient(colors['black'], colors['white'],
+        make_a_gradient(colors['us_corridor_square_border'],
+                        colors['us_corridor'],
                         name='corridor', gradients, rgbs)
 
-        make_a_gradient(colors['black'], colors['white'],
+        make_a_gradient(colors['us_darkened_square_border'],
+                        colors['us_darkened_square'],
                         name='darksquare', gradients, rgbs)
 
 
