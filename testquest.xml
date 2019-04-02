@@ -5,25 +5,8 @@
 
 <quest name="" region="Europe" version="1.0" width="1" height="1" boardName="HeroQuest">
 <board>
-<object id="CarpetRoom" left="18.0" top="2.0" rotation="downward" zorder="-10.0" />
-<object id="Table" left="6.0" top="8.0" rotation="downward" zorder="-5.0" />
-<object id="PitTrap" left="3.0" top="8.0" rotation="downward" zorder="-5.0" />
-<object id="Barbarian" left="3.0" top="3.0" rotation="downward" zorder="0.0" />
-<object id="ChaosWarrior" left="11.0" top="3.0" rotation="downward" zorder="0.0" />
+<dark left="26" top="19" width="1" height="1" />
+<object id="Prospector" left="9.1" top="6.0" rotation="downward" zorder="0.0" />
 </board>
-
-<subtitle> Quest 03 - Group Quest </subtitle>
-<title> The Candlestick Laboratory </title>
-<questtext> Look out heroes, the emperors wizard Wemperor was taking all the candlesticks and is hiding them in his mountain hideout Castle of Candle. Seek him out and save as many Candlesticks as you can </questtext>
-<notes> 
-This is a lofty cloud candle castle
-<mark id="A"> The first hero to search the Alchemist Bench will find a candlestick.
-</mark>
-</notes>
-
-<monsterstat name="Monster Lych" attack="3" defend="4" move="10" body="5" mind="4"  heroscribe_symbol_id="my_icon_id" />
-
-<wanderingmonster> 
-<monster id="Goblin" />
-</wanderingmonster>
+<speech></speech>
 </quest>
