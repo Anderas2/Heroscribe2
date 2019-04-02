@@ -46,6 +46,7 @@ class HeroScribe():
                              height = 1,
                              board = self.objects.get_board())
         self.osh.errorprint("Quest loaded. Starting GUI.")
+        app = QApplication(sys.argv)
         self.gui = gui()
         #self.osh.errorprint("Gui done.")
 
