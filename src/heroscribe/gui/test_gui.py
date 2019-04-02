@@ -12,16 +12,8 @@ class hs2_window(QMainWindow):
         self.width = 1024
         self.height = 768
 
-        # TODO: do some stuff to get the preferences once they are
-        # finished. In the end you will have this result, I promise:
-        self.gui_texts = {"add_objects" : "Add Objects",
-                       "edit_objects": "Edit Objects",
-                       "darken": "Darken/Color",
-                       "import":"Import",
-                       "export":"Export",
-                       "questimate":"Questimate",
-                      }
-        # TODO end
+        pref = Preferences()
+        self.g_text = pref.gui_texts['add_objects']
 
         try:
         	options = open("options", "r")

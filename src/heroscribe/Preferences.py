@@ -18,31 +18,21 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
+from pandas import read_excel
+
 class Preferences():
     ''' sets and reads stuff that can be chosen by the user and shall
     stay the same from session to session'''
 
     def __init__ (self):
-        language_dict = {"en":{"add_objects" : "Add Objects",
-                       "edit_objects": "Edit Objects",
-                       "darken": "Darken/Color",
-                       "import":"Import",
-                       "export":"Export",
-                       "questimate":"Questimate",
-                      },
-                 "de":{"add_objects" : "Neues Teil",
-                       "edit_objects": "Teil bearbeiten",
-                       "darken": "abdunkeln / färben",
-                       "import":"Import",
-                       "export":"Export",
-                       "questimate":"Questimate",
-                      },
-                 "fr":{"add_objects" : "Nouveau Piece",
-                       "edit_objects": "Editer Piece",
-                       "darken": "sombrer / coulourer",
-                       "import":"importer",
-                       "export":"exporter",
-                       "questimate":"Questimate",
-                      },
-                 }
-        self.gui_texts = language_dict['en']
+
+        # TODO: Find and read system language for mac and win.
+        # default shall be english;
+        # if the user overrides it, it can be a different language
+        sys_language = 'en'
+
+        # read language file
+        language_file = "https://docs.google.com/spreadsheets/d/1jYDOBCMFmcqQ2fmbhGuSnknJfX520HQRyitI4vNtDwc/export?format=xlsx"
+        in_lan = read_excel(language_file)
+        in_lan.set_index(['text'], inplace=True)
+        self.gui_texts = in_lan[sys_language].to_dict()
