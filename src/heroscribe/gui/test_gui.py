@@ -1,29 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
 from PyQt5.QtCore import pyqtSlot
+from src.heroscribe.Preferences import Preferences
 
-language_dict = {"en":{"add_objects" : "Add Objects",
-                       "edit_objects": "Edit Objects",
-                       "darken": "Darken/Color",
-                       "import":"Import",
-                       "export":"Export",
-                       "questimate":"Questimate",
-                      },
-                 "de":{"add_objects" : "Neues Teil",
-                       "edit_objects": "Teil bearbeiten",
-                       "darken": "abdunkeln / färben",
-                       "import":"Import",
-                       "export":"Export",
-                       "questimate":"Questimate",
-                      },
-                 "fr":{"add_objects" : "Nouveau Piece",
-                       "edit_objects": "Editer Piece",
-                       "darken": "sombrer / coulourer",
-                       "import":"importer",
-                       "export":"exporter",
-                       "questimate":"Questimate",
-                      },
-                 }
 
 class hs2_window(QMainWindow):
     def __init__(self):
@@ -32,11 +11,23 @@ class hs2_window(QMainWindow):
         self.title = 'Heroscribe 2.0'
         self.width = 1024
         self.height = 768
+
+        # TODO: do some stuff to get the preferences once they are
+        # finished. In the end you will have this result, I promise:
+        self.gui_texts = {"add_objects" : "Add Objects",
+                       "edit_objects": "Edit Objects",
+                       "darken": "Darken/Color",
+                       "import":"Import",
+                       "export":"Export",
+                       "questimate":"Questimate",
+                      }
+        # TODO end
+
         try:
         	options = open("options", "r")
         	self.lang = options.readline()[9:]
         	options.close()
-        except FileNotFoundError: 
+        except FileNotFoundError:
         	options = open("options", "x")
         	options.write("language=en\n")
         	self.lang = "en"
@@ -86,7 +77,7 @@ class hs2_window(QMainWindow):
 
         # Display the window
         self.show()
-        
+
     # Function to center main window
     def center_window(self):
     	win_bounds = self.frameGeometry()
