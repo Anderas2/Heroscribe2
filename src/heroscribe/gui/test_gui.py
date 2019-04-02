@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+""""
+  HeroScribe2
+  Copyright (C) 2019 Andreas Wagener and Shane Adams
+  Heroscribe 1 was by Flavio Chierichetti and Valerio Chierichetti
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published
+  by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+"""
+
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow
 #from PyQt5.QtGui import QIcon
@@ -37,6 +57,8 @@ class hs2_window(QMainWindow):
         self.height = 768
         self.initUI()
         self.lan = "en"
+        self.app = QApplication(sys.argv)
+
 
 	# Initialize the GUI to the main window
     def initUI(self):
@@ -117,8 +139,12 @@ class hs2_window(QMainWindow):
     def quest_click(self):
     	self.statusBar().showMessage('Questimator functionality hopefully coming soon!')
 
+    def exit_gui(self):
+        sys.exit(app.exec_())
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = hs2_window()
-    sys.exit(app.exec_())
+
+
+#if __name__ == '__main__':
+#    app = QApplication(sys.argv)
+#    ex = hs2_window()
+#    sys.exit(app.exec_())
