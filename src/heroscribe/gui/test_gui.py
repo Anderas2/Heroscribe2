@@ -1,6 +1,8 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
-from PyQt5.QtCore import pyqtSlot
+#from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
+from PyQt5.QtWidgets import *
+from src.heroscribe.Constants import Constants
+#from PyQt5.QtCore import pyqtSlot
 from src.heroscribe.Preferences import Preferences
 
 
@@ -8,7 +10,7 @@ class hs2_window(QMainWindow):
     def __init__(self):
         super().__init__()
         # Window stats
-        self.title = 'Heroscribe 2.0'
+        self.title = update_title()
         self.width = 1024
         self.height = 768
 
@@ -76,6 +78,12 @@ class hs2_window(QMainWindow):
     	screen_cp = QDesktopWidget().availableGeometry().center()
     	win_bounds.moveCenter(screen_cp)
     	self.move(win_bounds.topLeft())
+    	
+    def update_title(self):
+    	title = Constants.applicationName + ' ' + Constants.version
+    	return title
+
+    	
 
 	#--------------------Button Event Handlers--------------------#
 	# Add Object button
