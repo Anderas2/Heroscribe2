@@ -9,12 +9,15 @@ from src.heroscribe.Preferences import Preferences
 class hs2_window(QMainWindow):
     def __init__(self):
         super().__init__()
+        pref = Preferences()
+        const = Constants()
+        
         # Window stats
-        self.title = update_title()
+        self.title = self.update_title()
         self.width = 1024
         self.height = 768
 
-        pref = Preferences()
+        
         self.g_text = pref.gui_texts
 
         try:
@@ -80,7 +83,7 @@ class hs2_window(QMainWindow):
     	self.move(win_bounds.topLeft())
     	
     def update_title(self):
-    	title = Constants.applicationName + ' ' + Constants.version
+    	title = const.applicationName + ' ' + const.version
     	return title
 
     	
@@ -105,10 +108,3 @@ class hs2_window(QMainWindow):
     # Export button
     def export_click(self):
     	self.statusBar().showMessage('Export functionality hopefully coming soon!')
-
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = hs2_window()
-    sys.exit(app.exec_())
