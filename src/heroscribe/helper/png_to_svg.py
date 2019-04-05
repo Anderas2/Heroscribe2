@@ -751,7 +751,10 @@ class BlackGradients():
         inpath: Input path containing symbols
         outpath: where to upt the symbols
         verbosity: the higher, the more it talks
-        picturesize: dpi to render the eps
+        picturesize: dots per symbol to render the eps.
+        a symbol normally has 30 pixel on the screen, if you put 400 here like
+        advertised, it will give a more than tenfold oversampling and allows
+        some despeckling.
         medianfilter: for many symbols, this is good. For fine graphics like
         game board lines, this is deadly and should be set to 0
         '''
@@ -770,8 +773,6 @@ class BlackGradients():
             talk('No width infos were given, I suppose these are width 1 symbols', verbosity)
         elif not 'projectfolder' in icon_infos:
             icon_infos['projectfolder'] = 'YeOldeInn'
-
-        print('coloring pngs and make the vector')
 
         # to change colors and make vectors
         mc = BlackGradients(inpath=inpath, outpath=outpath, verbosity=verbosity )
@@ -833,10 +834,10 @@ class BlackGradients():
                                                 temp_file = png_name_temp.name,
                                                 scale_px = picturesize,
                                                 medianfilter = medianfilter)
-
+                print('Tracing Vector file')
                 mc.make_vector(png_name_temp.name, svg_name_temp.name,
                                              despeckle = 10)
-
+                print('controlling colors of vector file')
                 mc.recolor_svg_file(gradient_name, svg_name_temp.name, svg_name_temp2.name)
 
                 scale_factor = symsize.calculate_scale_svg(svg_name_temp2.name)
@@ -873,5 +874,8 @@ icon_infos = {'circle':True, #True or False
 inpath = 'C:\\Users\\Andreas\\Questimator\\input\\'
 outpath = 'C:\\Users\\Andreas\\Questimator\\output\\'
 
-cronjob(inpath = inpath, outpath = outpath,
-     icon_infos = icon_infos)
+bg = BlackGradients()
+bg.cronjob(inpath = inpath, outpath = outpath,
+     icon_infos = icon_infos,
+     picturesize = 200,
+     medianfilter = 0)

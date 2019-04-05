@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>506</width>
+    <height>532</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Monster Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../Icons/Base/Goblin.svg</normaloff>../../../Icons/Base/Goblin.svg</iconset>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>500</y>
+     <width>161</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphic_background">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>15</y>
+     <width>280</width>
+     <height>425</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active/>
+     <inactive/>
+     <disabled/>
+    </palette>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="toolTip">
+    <string>Double click to load a background image</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 8pt &quot;HQModern&quot;;</string>
+   </property>
+   <property name="interactive">
+    <bool>false</bool>
+   </property>
+   <property name="resizeAnchor">
+    <enum>QGraphicsView::AnchorUnderMouse</enum>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit_name">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>28</y>
+     <width>180</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>140</red>
+         <green>117</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>140</red>
+         <green>117</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>240</red>
+         <green>240</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <family>Gaze</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::WheelFocus</enum>
+   </property>
+   <property name="toolTip">
+    <string>Change the model's name here</string>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>-1</number>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="lineWrapColumnOrWidth">
+    <number>-4</number>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gaze'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Swordsman&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>69</x>
+     <y>58</y>
+     <width>162</width>
+     <height>189</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Double click to load an image</string>
+   </property>
+   <property name="toolTipDuration">
+    <number>-1</number>
+   </property>
+   <property name="statusTip">
+    <string>Click here to choose a picture</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_move">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>250</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>Move</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_at">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>250</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>AT</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_de">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>250</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>DE</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_bp">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>250</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>BP</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_mp">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>250</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>MP</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="plain_text_special_rules">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>319</y>
+     <width>201</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>64</red>
+         <green>115</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>64</red>
+         <green>115</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>240</red>
+         <green>240</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="toolTip">
+    <string>Type your special rule in this area</string>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="plainText">
+    <string>No special rules</string>
+   </property>
+   <property name="backgroundVisible">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="group_box_style">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>450</y>
+     <width>61</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="statusTip">
+    <string>Click here to switch between EU and US style cards</string>
+   </property>
+   <property name="title">
+    <string>Style</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>41</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QRadioButton" name="radio_us">
+       <property name="toolTip">
+        <string>Click here for US style layout</string>
+       </property>
+       <property name="text">
+        <string>US</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radio_eu">
+       <property name="toolTip">
+        <string>Click here for EU style layout</string>
+       </property>
+       <property name="text">
+        <string>EU</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QCheckBox" name="at_diagonal">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>30</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>This model may attack diagonal standing figures.</string>
+   </property>
+   <property name="statusTip">
+    <string>This model may attack diagonal standing enemies.</string>
+   </property>
+   <property name="text">
+    <string>Diagonal</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="at_ranged">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>50</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>This model may attack at range.</string>
+   </property>
+   <property name="statusTip">
+    <string>This model may make ranged attacks.</string>
+   </property>
+   <property name="text">
+    <string>Ranged</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="group_box_at_symbol">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>20</y>
+     <width>120</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>AT Symbol</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>111</width>
+      <height>74</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QRadioButton" name="radio_at_skull">
+       <property name="toolTip">
+        <string>Attacks on Skulls</string>
+       </property>
+       <property name="text">
+        <string>AT on skull</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/skull.gif</normaloff>../../../../Bildersammlung/skull.gif</iconset>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radio_at_shield">
+       <property name="toolTip">
+        <string>Attacks on Shields</string>
+       </property>
+       <property name="text">
+        <string>AT on Shield</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/white-shield.gif</normaloff>../../../../Bildersammlung/white-shield.gif</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radio_at_walrus">
+       <property name="toolTip">
+        <string>Attacks on Walrus</string>
+       </property>
+       <property name="text">
+        <string>AT on Walrus</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/black-shield.gif</normaloff>../../../../Bildersammlung/black-shield.gif</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QGraphicsView" name="icon_topleft">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>26</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>240</red>
+         <green>240</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="toolTip">
+    <string>Double Click to change the symbol</string>
+   </property>
+   <property name="statusTip">
+    <string>click here to choose an icon</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="icon_bottomright">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>390</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>121</red>
+         <green>94</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>121</red>
+         <green>94</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>240</red>
+         <green>240</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="toolTip">
+    <string>Double Click to change the symbol</string>
+   </property>
+   <property name="statusTip">
+    <string>Click here to choose an icon</string>
+   </property>
+   <property name="resizeAnchor">
+    <enum>QGraphicsView::AnchorViewCenter</enum>
+   </property>
+   <property name="rubberBandSelectionMode">
+    <enum>Qt::IntersectsItemBoundingRect</enum>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="group_box_de_symbol">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>220</y>
+     <width>120</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>DE Symbol</string>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>111</width>
+      <height>74</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QRadioButton" name="radio_de_skull">
+       <property name="toolTip">
+        <string>Defends on Skulls</string>
+       </property>
+       <property name="text">
+        <string>DE on skull</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/skull.gif</normaloff>../../../../Bildersammlung/skull.gif</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radio_de_shield">
+       <property name="toolTip">
+        <string>Defends on Shields</string>
+       </property>
+       <property name="text">
+        <string>DE on Shield</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/white-shield.gif</normaloff>../../../../Bildersammlung/white-shield.gif</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radio_de_walrus">
+       <property name="contextMenuPolicy">
+        <enum>Qt::PreventContextMenu</enum>
+       </property>
+       <property name="toolTip">
+        <string>Defends on Walruses</string>
+       </property>
+       <property name="text">
+        <string>DE on Walrus</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Bildersammlung/black-shield.gif</normaloff>../../../../Bildersammlung/black-shield.gif</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <property name="autoExclusive">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QSpinBox" name="at_number">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>110</y>
+     <width>42</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>How many attacks does this model have per turn?</string>
+   </property>
+   <property name="maximum">
+    <number>20</number>
+   </property>
+   <property name="value">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>90</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>AT Number</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>140</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>AT damage type</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="at_damage_type">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>160</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Enter some damage type here, like fire, magic, poison...
+ if there are several damage types, enter them comma separated.
+It's completely optional, except that some rare game 
+cards react on that (&quot;heals 2 BP damage from poison&quot;)</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="de_guardian">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>230</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If this model rolls two success symbols during defense, 
+all the attack damage is negated.</string>
+   </property>
+   <property name="statusTip">
+    <string>If two or more defense dice show the right symbol, all damage is negated.</string>
+   </property>
+   <property name="text">
+    <string>Guardian</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="de_master">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>250</y>
+     <width>69</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If this model rolls a single success symbols during defense, 
+all the attack damage is negated.</string>
+   </property>
+   <property name="statusTip">
+    <string> If a single defense die shows the right symbol, all damage is negated.</string>
+   </property>
+   <property name="text">
+    <string>Master</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="de_phalanx">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>270</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If two or more models with this rule are in the same room,
+they all get one defense die more. This assumes that the
+controlling player knows how to play for activating this rule.</string>
+   </property>
+   <property name="statusTip">
+    <string>If several models with &quot;phalanx&quot; are in the same room, they all get one white die more for defense. Assuming their player knows how to play this rule.</string>
+   </property>
+   <property name="text">
+    <string>Phalanx</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>340</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Immune to:</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="de_immune">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>360</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>Enter some comma separated words here. The model is 
+immune to this damage. &quot;all&quot; means it is invulnerable. 
+Should be the same words like AT damage type.</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="de_except">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>410</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If you entered &quot;all&quot; in immune, you may enter exceptions 
+here. Immune: all and Except for magic, that means a 
+model can be harmed only by magic.</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>390</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Except for:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>450</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>List of Spells:</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="spells">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>470</y>
+     <width>171</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>If this model can use spells, enter them here.
+ It will be displayed in the quest monster table.</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>440</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Tags:</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="tags">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>460</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>put as many comma separated tags here as you like. 
+This helps filtering the monster list in the editor; it also 
+helps targeting for some ingame effects (&quot;Undead models 
+are immune to this spell&quot;) Tags used today are:
+
+Green, Undead, Chaos, Demon, Human, Special, Ogre, 
+Sorcerer, Hero, Ice, Boss, Man-at-Arms, Elf, Beast, 
+Soldier, Dragon, Golem, Skaven, Troll, Dwarf, Base, KK, 
+Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="plainText_move">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>270</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>Enter the move value here</string>
+   </property>
+   <property name="text">
+    <string>6</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="plainText_at">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>270</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>Enter the AT value here</string>
+   </property>
+   <property name="text">
+    <string>2</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="plainText_de">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>270</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>Enter the DE value here</string>
+   </property>
+   <property name="text">
+    <string>2</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="plainText_bp">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>270</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>Enter the BP here</string>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="plainText_mp">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>270</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>HQModern</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>Enter the MP here</string>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>group_box_style</zorder>
+  <zorder>group_box_de_symbol</zorder>
+  <zorder>group_box_at_symbol</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>graphic_background</zorder>
+  <zorder>textEdit_name</zorder>
+  <zorder>graphicsView</zorder>
+  <zorder>label_move</zorder>
+  <zorder>label_at</zorder>
+  <zorder>label_de</zorder>
+  <zorder>label_bp</zorder>
+  <zorder>label_mp</zorder>
+  <zorder>plain_text_special_rules</zorder>
+  <zorder>at_diagonal</zorder>
+  <zorder>at_ranged</zorder>
+  <zorder>icon_topleft</zorder>
+  <zorder>icon_bottomright</zorder>
+  <zorder>at_number</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_7</zorder>
+  <zorder>at_damage_type</zorder>
+  <zorder>de_guardian</zorder>
+  <zorder>de_master</zorder>
+  <zorder>de_phalanx</zorder>
+  <zorder>label_8</zorder>
+  <zorder>de_immune</zorder>
+  <zorder>de_except</zorder>
+  <zorder>label_9</zorder>
+  <zorder>label_10</zorder>
+  <zorder>spells</zorder>
+  <zorder>label_11</zorder>
+  <zorder>tags</zorder>
+  <zorder>plainText_move</zorder>
+  <zorder>plainText_at</zorder>
+  <zorder>plainText_de</zorder>
+  <zorder>plainText_bp</zorder>
+  <zorder>plainText_mp</zorder>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
