@@ -71,11 +71,12 @@ class Read():
         piece.door = xmlpiece.getAttribute("door")
         piece.trap = xmlpiece.getAttribute("trap")
         piece.u_trap = xmlpiece.getAttribute("untraceabletrap")
+        piece.mini_icon = xmlpiece.getAttribute("miniIcon")
+
 
         piece.width = xmlpiece.getAttribute("width")
         piece.height = xmlpiece.getAttribute("height")
         piece.zorder = xmlpiece.getAttribute("zorder")
-        piece.mini_icon = xmlpiece.getAttribute("miniIcon")
 
         # TODO: put tag dictionary into the xml file and read them here,
         # for better filter functions
