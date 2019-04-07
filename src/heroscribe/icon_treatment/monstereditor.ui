@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>Anderas</author>
  <class>Dialog</class>
  <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>532</height>
+    <width>578</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,8 +27,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>500</y>
+     <x>370</x>
+     <y>520</y>
      <width>161</width>
      <height>32</height>
     </rect>
@@ -42,30 +43,78 @@
   <widget class="QGraphicsView" name="graphic_background">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>15</y>
+     <x>30</x>
+     <y>25</y>
      <width>280</width>
      <height>425</height>
     </rect>
    </property>
    <property name="palette">
     <palette>
-     <active/>
-     <inactive/>
-     <disabled/>
+     <active>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>65</red>
+         <green>255</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="0">
+         <red>65</red>
+         <green>255</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>240</red>
+         <green>240</green>
+         <blue>240</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
     </palette>
    </property>
    <property name="acceptDrops">
     <bool>false</bool>
    </property>
    <property name="toolTip">
-    <string>Double click to load a background image</string>
+    <string/>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">font: 8pt &quot;HQModern&quot;;</string>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="interactive">
     <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
    <property name="resizeAnchor">
     <enum>QGraphicsView::AnchorUnderMouse</enum>
@@ -74,8 +123,8 @@
   <widget class="QTextEdit" name="textEdit_name">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>28</y>
+     <x>80</x>
+     <y>38</y>
      <width>180</width>
      <height>29</height>
     </rect>
@@ -120,7 +169,7 @@
    <property name="font">
     <font>
      <family>Gaze</family>
-     <pointsize>14</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="focusPolicy">
@@ -154,15 +203,15 @@
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gaze'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Swordsman&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gaze'; font-size:18pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Swordsman&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>69</x>
-     <y>58</y>
+     <x>89</x>
+     <y>68</y>
      <width>162</width>
      <height>189</height>
     </rect>
@@ -174,28 +223,48 @@ p, li { white-space: pre-wrap; }
     <number>-1</number>
    </property>
    <property name="statusTip">
-    <string>Click here to choose a picture</string>
+    <string>Double click here to choose a picture</string>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
    </property>
    <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
     <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="sizeAdjustPolicy">
     <enum>QAbstractScrollArea::AdjustToContents</enum>
    </property>
+   <property name="sceneRect">
+    <rectf>
+     <x>0.000000000000000</x>
+     <y>0.000000000000000</y>
+     <width>162.000000000000000</width>
+     <height>189.000000000000000</height>
+    </rectf>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label_move">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>250</y>
-     <width>41</width>
+     <x>62</x>
+     <y>260</y>
+     <width>57</width>
      <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>HQModern</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="focusPolicy">
@@ -211,8 +280,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_at">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>250</y>
+     <x>110</x>
+     <y>260</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -220,7 +289,7 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>HQModern</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -233,8 +302,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_de">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>250</y>
+     <x>150</x>
+     <y>260</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -242,7 +311,7 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>HQModern</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -255,8 +324,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_bp">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>250</y>
+     <x>190</x>
+     <y>260</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -264,7 +333,7 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>HQModern</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -277,8 +346,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_mp">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>250</y>
+     <x>230</x>
+     <y>260</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -286,7 +355,7 @@ p, li { white-space: pre-wrap; }
    <property name="font">
     <font>
      <family>HQModern</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
@@ -299,8 +368,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QPlainTextEdit" name="plain_text_special_rules">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>319</y>
+     <x>50</x>
+     <y>329</y>
      <width>201</width>
      <height>101</height>
     </rect>
@@ -379,8 +448,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QGroupBox" name="group_box_style">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>450</y>
+     <x>30</x>
+     <y>480</y>
      <width>61</width>
      <height>71</height>
     </rect>
@@ -430,8 +499,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QCheckBox" name="at_diagonal">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>30</y>
+     <x>360</x>
+     <y>40</y>
      <width>70</width>
      <height>17</height>
     </rect>
@@ -449,8 +518,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QCheckBox" name="at_ranged">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>50</y>
+     <x>360</x>
+     <y>60</y>
      <width>70</width>
      <height>17</height>
     </rect>
@@ -468,8 +537,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QGroupBox" name="group_box_at_symbol">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>20</y>
+     <x>440</x>
+     <y>30</y>
      <width>120</width>
      <height>101</height>
     </rect>
@@ -497,7 +566,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/skull.gif</normaloff>../../../../Bildersammlung/skull.gif</iconset>
+         <normaloff>skull.gif</normaloff>skull.gif</iconset>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -514,7 +583,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/white-shield.gif</normaloff>../../../../Bildersammlung/white-shield.gif</iconset>
+         <normaloff>white-shield.gif</normaloff>white-shield.gif</iconset>
        </property>
       </widget>
      </item>
@@ -528,7 +597,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/black-shield.gif</normaloff>../../../../Bildersammlung/black-shield.gif</iconset>
+         <normaloff>black-shield.gif</normaloff>black-shield.gif</iconset>
        </property>
       </widget>
      </item>
@@ -538,8 +607,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QGraphicsView" name="icon_topleft">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>26</y>
+     <x>40</x>
+     <y>36</y>
      <width>40</width>
      <height>40</height>
     </rect>
@@ -582,17 +651,26 @@ p, li { white-space: pre-wrap; }
     </palette>
    </property>
    <property name="toolTip">
-    <string>Double Click to change the symbol</string>
+    <string>Double click to change the symbol</string>
    </property>
    <property name="statusTip">
-    <string>click here to choose an icon</string>
+    <string>double click here to choose an icon</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
   <widget class="QGraphicsView" name="icon_bottomright">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>390</y>
+     <x>260</x>
+     <y>400</y>
      <width>40</width>
      <height>40</height>
     </rect>
@@ -638,7 +716,16 @@ p, li { white-space: pre-wrap; }
     <string>Double Click to change the symbol</string>
    </property>
    <property name="statusTip">
-    <string>Click here to choose an icon</string>
+    <string>double click here to choose an icon</string>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
    <property name="resizeAnchor">
     <enum>QGraphicsView::AnchorViewCenter</enum>
@@ -650,8 +737,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QGroupBox" name="group_box_de_symbol">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>220</y>
+     <x>440</x>
+     <y>230</y>
      <width>120</width>
      <height>101</height>
     </rect>
@@ -679,7 +766,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/skull.gif</normaloff>../../../../Bildersammlung/skull.gif</iconset>
+         <normaloff>skull.gif</normaloff>skull.gif</iconset>
        </property>
       </widget>
      </item>
@@ -693,7 +780,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/white-shield.gif</normaloff>../../../../Bildersammlung/white-shield.gif</iconset>
+         <normaloff>white-shield.gif</normaloff>white-shield.gif</iconset>
        </property>
       </widget>
      </item>
@@ -710,7 +797,7 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../Bildersammlung/black-shield.gif</normaloff>../../../../Bildersammlung/black-shield.gif</iconset>
+         <normaloff>black-shield.gif</normaloff>black-shield.gif</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -732,8 +819,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QSpinBox" name="at_number">
    <property name="geometry">
     <rect>
-     <x>304</x>
-     <y>110</y>
+     <x>360</x>
+     <y>120</y>
      <width>42</width>
      <height>22</height>
     </rect>
@@ -751,8 +838,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>90</y>
+     <x>360</x>
+     <y>100</y>
      <width>51</width>
      <height>20</height>
     </rect>
@@ -764,8 +851,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_7">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>140</y>
+     <x>360</x>
+     <y>150</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -777,8 +864,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QPlainTextEdit" name="at_damage_type">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>160</y>
+     <x>360</x>
+     <y>170</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -793,8 +880,8 @@ cards react on that (&quot;heals 2 BP damage from poison&quot;)</string>
   <widget class="QCheckBox" name="de_guardian">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>230</y>
+     <x>360</x>
+     <y>240</y>
      <width>70</width>
      <height>17</height>
     </rect>
@@ -813,8 +900,8 @@ all the attack damage is negated.</string>
   <widget class="QCheckBox" name="de_master">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>250</y>
+     <x>360</x>
+     <y>260</y>
      <width>69</width>
      <height>17</height>
     </rect>
@@ -833,8 +920,8 @@ all the attack damage is negated.</string>
   <widget class="QCheckBox" name="de_phalanx">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>270</y>
+     <x>360</x>
+     <y>280</y>
      <width>70</width>
      <height>17</height>
     </rect>
@@ -854,8 +941,8 @@ controlling player knows how to play for activating this rule.</string>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>340</y>
+     <x>360</x>
+     <y>350</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -867,8 +954,8 @@ controlling player knows how to play for activating this rule.</string>
   <widget class="QPlainTextEdit" name="de_immune">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>360</y>
+     <x>360</x>
+     <y>370</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -882,8 +969,8 @@ Should be the same words like AT damage type.</string>
   <widget class="QPlainTextEdit" name="de_except">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>410</y>
+     <x>360</x>
+     <y>420</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -897,8 +984,8 @@ model can be harmed only by magic.</string>
   <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>390</y>
+     <x>360</x>
+     <y>400</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -910,8 +997,8 @@ model can be harmed only by magic.</string>
   <widget class="QLabel" name="label_10">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>450</y>
+     <x>120</x>
+     <y>480</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -923,8 +1010,8 @@ model can be harmed only by magic.</string>
   <widget class="QPlainTextEdit" name="spells">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>470</y>
+     <x>120</x>
+     <y>500</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -937,8 +1024,8 @@ model can be harmed only by magic.</string>
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>440</y>
+     <x>360</x>
+     <y>450</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -950,8 +1037,8 @@ model can be harmed only by magic.</string>
   <widget class="QPlainTextEdit" name="tags">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>460</y>
+     <x>360</x>
+     <y>470</y>
      <width>171</width>
      <height>31</height>
     </rect>
@@ -971,8 +1058,8 @@ Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
   <widget class="QLineEdit" name="plainText_move">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>270</y>
+     <x>70</x>
+     <y>280</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -996,8 +1083,8 @@ Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
   <widget class="QLineEdit" name="plainText_at">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>270</y>
+     <x>110</x>
+     <y>280</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1021,8 +1108,8 @@ Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
   <widget class="QLineEdit" name="plainText_de">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>270</y>
+     <x>150</x>
+     <y>280</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1046,8 +1133,8 @@ Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
   <widget class="QLineEdit" name="plainText_bp">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>270</y>
+     <x>190</x>
+     <y>280</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -1071,8 +1158,8 @@ Rotlw, ATOH, WOM (or woz), BQP, DarkCompany, EQP.</string>
   <widget class="QLineEdit" name="plainText_mp">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>270</y>
+     <x>230</x>
+     <y>280</y>
      <width>41</width>
      <height>41</height>
     </rect>

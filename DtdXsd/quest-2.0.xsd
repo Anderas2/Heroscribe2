@@ -124,6 +124,7 @@
  <xsd:attribute name="rotation" type="rotationType" default="downward" />
  <xsd:attribute name="xoffset" type="xsd:float" default="0.0"/>
  <xsd:attribute name="yoffset" type="xsd:float" default="0.0"/>
+ 
 </xsd:complexType>
 
 <xsd:simpleType name="rotationType">

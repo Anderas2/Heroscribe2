@@ -1,0 +1,1 @@
+pyuic5.exe "monstereditor.ui" -o monster_editor.py
