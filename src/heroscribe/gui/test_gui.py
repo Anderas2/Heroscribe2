@@ -83,6 +83,7 @@ class hs2_window(QMainWindow):
     	self.move(win_bounds.topLeft())
     	
     def update_title(self):
+    	const = Constants()
     	title = const.applicationName + ' ' + const.version
     	return title
 
