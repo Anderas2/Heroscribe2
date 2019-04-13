@@ -21,11 +21,12 @@ import re
 import tempfile
 from scipy.ndimage.filters import median_filter
 import gzip # to make or unpack gz archives
-from hs_eps_2_pic import EPS2PNG
+from src.heroscribe.helper.hs_eps_2_pic import EPS2PNG
 
 from shutil import copyfileobj
 #from math import ceil
 from PIL import Image
+from PIL import ImageFilter
 #from datetime import datetime
 #from copy import deepcopy # to make real copies of dicts
 
@@ -388,7 +389,7 @@ class BlackGradients():
         self.__basepath = basepath
         self.__codepath = basepath + "\\Code"
         self.VERBOSE = verbosity
-        self.AUTOTRACE = '"' + self.__basepath + '\\autotrace\\autotrace.exe"'
+        self.AUTOTRACE =  self.__basepath + "\\autotrace\\autotrace.exe"
 
         if outpath == None:
             self.OUT_FOLDERS = basepath + '\\output\\'
@@ -415,7 +416,9 @@ class BlackGradients():
 
     def make_vector(self, pic_path, svg_path,
                     savetime = False, outformat = 'svg',
-                    despeckle = 10):
+                    despeckle = 10,
+                    errorthresh = 2,
+                    cornerdetect = 4):
         ''' Uses autotrace to generate eps files.
         it repeats the proces some times until it worked well at least once.
 
@@ -468,6 +471,7 @@ class BlackGradients():
             image_out = image_out.convert('RGB')
 
         bmp_temp = tempfile.NamedTemporaryFile(delete=False, suffix=".bmp")
+        bmp_temp.close()
 
         try:
             with open(bmp_temp.name, 'wb') as file:
@@ -477,27 +481,31 @@ class BlackGradients():
                  self.VERBOSE)
             despeckle = 10
             # compose command line argument for autotrace
-            command = self.AUTOTRACE \
+            command = '"' + self.AUTOTRACE + '"' \
                     + ' -output-file "' + svg_path +  '"' \
                     + ' -output-format ' + outformat + ' ' \
                     + ' -despeckle-level ' + str(despeckle) \
                     + ' -color-count 0' \
                     + ' -background-color FFFFFF' \
                     + ' -input-format bmp ' \
-                    + ' -error-threshold 3' \
+                    + ' -error-threshold ' + str(errorthresh) \
+                    + ' -corner-surround ' + str(cornerdetect) \
                     + ' "' + bmp_temp.name + '"'
-
             # open cmd and execute autotrace
             p=cmd.Popen(command, stdout=cmd.PIPE, stderr=cmd.PIPE)
             if len(p.communicate()[1]) > 1:
-                print('Function "Make Vectors" here.\n')
-                print('A problem occured while generating vectors\n')
-                print('file concerned: \n', pic_path)
-                print('\n\nError message:\n')
-                print(p.communicate()[1].decode('utf-8'))
+                message = ''
+                message += ('Function "Make Vectors" here.\n')
+                message += ('A problem occured while generating vectors\n')
+                message += ('file concerned: \n', pic_path)
+                message += ('\n\nError message:\n')
+                message += (p.communicate()[1].decode('utf-8'))
+                raise NameError(message)
             p.kill()
 
-        except:
+        except Exception as err:
+            print("failure in autotrace function")
+            print(err)
             print(bmp_temp.name)
             raise
         else:
@@ -522,7 +530,7 @@ class BlackGradients():
         else:
             return tuple([float(a) * float(scalar) for a in in_tuple])
 
-    def black_gradient_only(self):
+    def black_gradient_only(self, mid=0.55):
         ''' a function to define lots of colors. Currently it defines just one.
         '''
         colors = { 'white':(1., 1., 1.),
@@ -536,7 +544,7 @@ class BlackGradients():
         gradient_name = 'black'
         gradients[gradient_name] = LSC.from_list(gradient_name,
                                                 [(0, colors['black']),
-                                                 (0.55, colors['black']),
+                                                 (mid, colors['black']),
                                                  (1, colors['white'])],
                                                  N=256)
 
@@ -549,14 +557,16 @@ class BlackGradients():
         self.rgbs = rgbs
         self.icons = icons
 
-        # Make a look up table to
-        # enhance contrast a little bit. LUT means Look up table
-        LUT=np.zeros(256,dtype=np.uint8)
-        LUT[10:235+1]=np.linspace(start=0,stop=255,
-                                num=(235-10)+1,
-                                endpoint=True,dtype=np.uint8)
-        LUT[-20:]=255
-        self.__LUT = LUT
+    def set_midpoint(self, mid):
+        new_gradients = {}
+        for gradient in self.gradients:
+            new_gradients[gradient] = LSC.from_list(gradient,
+                                                [(0, self.rgbs['black']['dark']),
+                                                 (mid, self.rgbs['black']['dark']),
+                                                 (1, self.rgbs['black']['bright'])],
+                                                 N=256)
+        self.gradients = new_gradients
+
 
 ###############################################################################
 # finally. Work on all the png's in the input folder
@@ -567,7 +577,8 @@ class BlackGradients():
         h = hex_str.lstrip('#')
         return tuple(int(h[i:i+2], 16) for i in (0, 2 ,4))
 
-    def recolor_svg_file(self, gradient_name, infile_path, outfilepath):
+    def recolor_svg_file(self, gradient_name, infile_path, outfilepath,
+                         gradient_mid = 0.55):
 
         ''' Applies one color gradient to one EU svg file as it comes
         out of Autotrace and then changes the name from _EU to _gradientname
@@ -580,10 +591,10 @@ class BlackGradients():
         #sanity checks
 
         infile = infile_path
-        print("saving recolored svg files to ", outpath)
 
-        talk('start eps recoloring of file \n{} \nwith gradient {}'.format(
+        talk('start svg recoloring of file \n{} \nwith gradient {}'.format(
                 infile, gradient_name), self.VERBOSE)
+        self.set_midpoint(gradient_mid)
 
         if gradient_name in self.rgbs:
 
@@ -639,7 +650,7 @@ class BlackGradients():
                         color = self.hex2rgb(match[0][1])
                         color = (color[0] + color[1] + color[2])/3
 
-                        if color >= 0.5:
+                        if color >= gradient_mid:
                             # apply bright color
                             line = re_colorfind.sub(bright_fill, line)
                         else:
@@ -656,61 +667,107 @@ class BlackGradients():
 
 
 ###############################################################################
+    def enhance_contrast(self, im, contrast):
+        ''' takes an np array of an image and applies a contrast enhancing
+        Look Up Table. Returns an np array of an image.
+        '''
+                # Make a look up table to
+        # enhance contrast a little bit. LUT means Look up table
+        LUT = np.zeros(256,dtype = np.uint8)
+        LUT[contrast:256 - contrast] = np.linspace(start = 0,
+                                                 stop = 255,
+                                                 num = (256-(2*contrast)),
+                                                 endpoint = True,
+                                                 dtype = np.uint8)
+        LUT[-contrast:] = 255
+        LUT[0:contrast] = 0
+        return LUT[im]
 
-    def recolor_one_png(self, gradient_name,
-                          infile,
-                          outfile,
-                          scale_px=False,
-                          temp_file=None,
-                          medianfilter = 5):
+###############################################################################
+
+
+    def recolor_one_png(self, gradient_name = None,
+                          infile = None,
+                          outfile = None,
+                          upsampling = 0,
+                          scale_px = False,
+                          temp_file = None,
+                          medianfilter = 5,
+                          contrast = 10):
         ''' Applies one color gradient to one png and changes
         the name to file_gradientname.png
         '''
         #sanity checks
-        if not infile.endswith(".png"):
+        if (not infile
+        or not infile.endswith(".png")):
             message = "Problem in the recolor png function.\n"
             message += "I did not receive a filename, or the file was no png.\n"
             message += "I received {}".format(infile)
             raise NameError(message)
 
-        if os.path.isfile(outfile):
-            os.remove(outfile)
-        checkpath(os.path.dirname(outfile))
+        if outfile:
+            if os.path.isfile(outfile):
+                os.remove(outfile)
+            checkpath(os.path.dirname(outfile))
 
-        if gradient_name in self.gradients:
-            gradient_LSC = self.gradients[gradient_name]
-        else:
-            message = 'I didnt find your color {} among my gradients.\n'.format(gradient_name)
-            message += 'You can find the list of available colors in "gradient_names".'
-            raise NameError(message)
+        if gradient_name:
+            if gradient_name in self.gradients:
+                gradient_LSC = self.gradients[gradient_name]
+            else:
+                message = 'I didnt find your color {} among my gradients.\n'.format(gradient_name)
+                message += 'You can find the list of available colors in "gradient_names".'
+                raise NameError(message)
 
         if scale_px:
             scale_px = int(scale_px)
         # now work on the image
         image = Image.open(infile)
+        image = image.convert('RGBA')
+        if upsampling:
+            # make a new picture to have a bit of frame around the old one
+            im_new = Image.new('RGBA',
+                               size = (image.size[0] + 4, image.size[1] + 4),
+                               color = (255, 255, 255, 0)
+                               )
+            pos = (2, 2)
+            im_new.paste(image, box = pos)
+            image = im_new.resize( (image.size[0] * upsampling + 1, image.size[1] * upsampling + 1),
+                                 resample = Image.BILINEAR)
+
+        if medianfilter > 0:
+            image = image.filter(ImageFilter.MedianFilter( medianfilter))
+
+
         im = np.array(image.convert('LA'))
-
-
         im_alpha = im[:,:,1] # save alpha channel
         im = im[:,:,0] # keep grey channel, discard alpha channel
-        if medianfilter > 0:
-            im = median_filter(im, size= (medianfilter, medianfilter))
+#        if medianfilter > 0:
+#            im = ImageFilter.MedianFilter(im, medianfilter)
+#            im = median_filter(im, size= (medianfilter, medianfilter),
+#                               mode = 'wrap')
 
-        # apply contrast enhancing Look Up Table
-        im = self.__LUT[im]
+        if contrast > 0:
+            # apply contrast enhancing Look Up Table
+            im = self.enhance_contrast(im, contrast)
+
 
         # Set image content in transparent areas to white
         im_zero = im_alpha==0 # get mask
         im_zero = im_zero*255 # multiply mask with white
         im = np.maximum(im, im_zero) # apply the max of white mask and image
 
-        im_grad = gradient_LSC(im) # apply color gradient to grey image
-        im_grad = np.uint8(im_grad*255) # with colorspace 255
+        if gradient_name:
+            im_grad = gradient_LSC(im) # apply color gradient to grey image
+            im_grad = np.uint8(im_grad*255) # with colorspace 255
 
-        # for direct use: png in scale_px size with alpha mask
-        im_grad[:,:,3]=im_alpha # get mask back into image
-        image_out = Image.fromarray(im_grad)
-        if not temp_file == None:
+            # for direct use: png in scale_px size with alpha mask
+            im_grad[:,:,3]=im_alpha # get mask back into image
+            image_out = Image.fromarray(im_grad)
+
+        else:
+            image_out = Image.fromarray(im)
+
+        if temp_file:
             if image_out.mode !='RGBA':
                 save_image = image_out.convert('RGBA')
             else:
@@ -723,13 +780,13 @@ class BlackGradients():
             wsize = int((float(image_out.width)  * float(scale)))
             image_out = image_out.resize((wsize, hsize), Image.LANCZOS)
 
-        image_out.save(outfile, fmt="png")
-
-
-
-
-
-        return outfile
+        if outfile:
+            image_out.save(outfile, fmt="png")
+            return outfile
+        elif temp_file:
+            return temp_file
+        else:
+            return None
 
 ###############################################################################
 
