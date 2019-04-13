@@ -1,18 +1,23 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
-from PyQt5.QtCore import pyqtSlot
+#from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QDesktopWidget
+from PyQt5.QtWidgets import *
+from src.heroscribe.Constants import Constants
+#from PyQt5.QtCore import pyqtSlot
 from src.heroscribe.Preferences import Preferences
 
 
 class hs2_window(QMainWindow):
     def __init__(self):
         super().__init__()
+        pref = Preferences()
+        const = Constants()
+        
         # Window stats
-        self.title = 'Heroscribe 2.0'
+        self.title = self.update_title()
         self.width = 1024
         self.height = 768
 
-        pref = Preferences()
+        
         self.g_text = pref.gui_texts
 
         try:
@@ -76,6 +81,13 @@ class hs2_window(QMainWindow):
     	screen_cp = QDesktopWidget().availableGeometry().center()
     	win_bounds.moveCenter(screen_cp)
     	self.move(win_bounds.topLeft())
+    	
+    def update_title(self):
+    	const = Constants()
+    	title = const.applicationName + ' ' + const.version
+    	return title
+
+    	
 
 	#--------------------Button Event Handlers--------------------#
 	# Add Object button
@@ -97,10 +109,3 @@ class hs2_window(QMainWindow):
     # Export button
     def export_click(self):
     	self.statusBar().showMessage('Export functionality hopefully coming soon!')
-
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = hs2_window()
-    sys.exit(app.exec_())
