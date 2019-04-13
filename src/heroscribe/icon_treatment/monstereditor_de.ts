@@ -11,7 +11,7 @@
     <message>
         <location filename="monstereditor.ui" line="62"/>
         <source>Double click to load a background image</source>
-        <translation>Zum Bild laden doppelklicken</translation>
+        <translation type="unfinished">Zum Bild laden doppelklicken</translation>
     </message>
     <message>
         <location filename="monstereditor.ui" line="130"/>
@@ -30,12 +30,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="monstereditor.ui" line="171"/>
         <source>Double click to load an image</source>
-        <translation>Zum Bild laden doppelklicken</translation>
+        <translation type="unfinished">Zum Bild laden lklicken</translation>
     </message>
     <message>
         <location filename="monstereditor.ui" line="177"/>
         <source>Click here to choose a picture</source>
-        <translation>Zum Bild laden doppelklicken</translation>
+        <translation type="unfinished">Zum Bild laden klicken</translation>
     </message>
     <message>
         <location filename="monstereditor.ui" line="205"/>
@@ -170,7 +170,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="monstereditor.ui" line="638"/>
         <source>Double Click to change the symbol</source>
-        <translation>Doppelklick um ein Symbol auszusuchen</translation>
+        <translation type="unfinished">Doppelklick um ein Symbol auszusuchen</translation>
     </message>
     <message>
         <location filename="monstereditor.ui" line="588"/>

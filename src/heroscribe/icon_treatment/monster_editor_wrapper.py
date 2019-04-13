@@ -128,8 +128,6 @@ class MonsterData(QDialog):
             return
         self.scene_monpic.clear()
         pix_map = QPixmap(str(image_path))
-        h = pix_map.size().height()
-        w = pix_map.size().width()
         self.pix_map = pix_map
         scaled = pix_map.scaled(162, 189, Qt.KeepAspectRatio)
         if scaled.size().width() < 162:
